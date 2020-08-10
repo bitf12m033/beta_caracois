@@ -2,6 +2,7 @@
 
 @section('content')
 <!-- begin:: Content -->
+
 <div class="kt-content  kt-grid__item kt-grid__item--fluid" id="kt_content">
 	<div class="row">
 		<div class="col-lg-12">
@@ -43,9 +44,9 @@
 							<div class="col-lg-4">
 								<label for="email">Email</label>
 								<div class="input-group">
-														<div class="input-group-prepend"><span class="input-group-text">@</span></div>
-														<input type="email" id="email" name="email" class="form-control" placeholder="Email" aria-describedby="basic-addon1">
-													</div>
+									<div class="input-group-prepend"><span class="input-group-text">@</span></div>
+									<input type="email" id="email" name="email" class="form-control" placeholder="Email" aria-describedby="basic-addon1">
+								</div>
 								<!-- <input type="email" id="email" name="email" class="form-control" placeholder="Enter email"> -->
 								<!-- <span class="form-text text-muted">Please enter your email</span> -->
 							</div>
@@ -148,20 +149,15 @@
 							<div class="col-lg-4">
 								<label for="user_image">Upload Profile</label>
 								<div class="kt-input-icon kt-input-icon--right">
-									<input type="file" id="user_image" name="user_image" class="form-control" >
-									<!-- <span class="kt-input-icon__icon kt-input-icon__icon--right"><span><i class="la la-map-marker"></i></span></span> -->
-								</div>
-								<!-- <span class="form-text text-muted">Please enter your postcode</span> -->
-							</div>
-							<!-- <label class="col-form-label col-lg-3 col-sm-12">Single File Upload</label>
-							<div class="col-lg-4 col-md-9 col-sm-12">
-								<div class="kt-dropzone " action="inc/api/dropzone/upload.php" id="m-dropzone-one">
-									<div class="kt-dropzone__msg dz-message needsclick">
-										<h3 class="kt-dropzone__msg-title">Drop files here or click to upload.</h3>
-										<span class="kt-dropzone__msg-desc">This is just a demo dropzone. Selected files are <strong>not</strong> actually uploaded.</span>
+							
+									<div id="image-preview">
+									  <label for="image-upload" id="image-label">Choose File</label>
+									  <input type="file" name="user_image" id="image-upload" />
 									</div>
 								</div>
-							</div> -->
+								
+							</div>
+							
 						</div>
 					</div>
 

@@ -119,7 +119,7 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, $id)
     {
          $request->validate([
             'name' => 'required',
@@ -130,14 +130,33 @@ class UserController extends Controller
             'state' => 'required',
             'dob' => 'required',
             'role_type' => 'required',
+            'user_image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
-        //$requestData = $request->all();
-         $request->merge(['dob' =>Carbon::parse($request->input('dob'))->format('Y-m-d')]);
+
+        if ($request->file('user_image')) {
+              $imagePath = $request->file('user_image');
+              $imageName = uniqid().".".$request->file('user_image')->extension();
+
+            $path = $request->file('user_image')->storeAs('uploads/user', $imageName, 'public');
+            $request->file('user_image')->move(public_path('uploads/user'), $imageName);
+        }
        
-       $inputData = $request->except('_method', '_token');
-        // dd($request->all());
-       $user->update($inputData);
-        // User::whereId($user->id)->update($inputData);
+        $user = User::find($id);
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        $user->phone = $request->input('phone');
+        $user->city = $request->input('city');
+        $user->state = $request->input('state');
+        $user->zip = $request->input('zip');
+        $user->address1 = $request->input('address1');
+        $user->address2 = $request->input('address2');
+        $user->dob = Carbon::parse($request->input('dob'))->format('Y-m-d');
+        $user->role_type = $request->input('role_type');
+        $user->password = $request->input('password');
+        $user->user_image = $path;
+        
+        // dd($product);
+        $user->save();
 
         //sign them in
         $notification = [

@@ -69,7 +69,7 @@
 						<span class="kt-menu__link-text">Products</span>
 					</a>
 				</li>
-				<li class="kt-menu__item {{ Request::is('users*') ? 'kt-menu__item--open' : '' }}  kt-menu__item--submenu" aria-haspopup="true" data-ktmenu-submenu-toggle="hover">
+				<li class="kt-menu__item {{ Request::is('user*') ? 'kt-menu__item--open' : '' }}  kt-menu__item--submenu" aria-haspopup="true" data-ktmenu-submenu-toggle="hover">
 					<a href="javascript:;" class="kt-menu__link kt-menu__toggle">
 						<span class="kt-menu__link-icon">
 							<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
@@ -98,8 +98,8 @@
 									</span>
 								</span>
 							</li>
-							<li class="kt-menu__item " aria-haspopup="true">
-								<a href="" class="kt-menu__link ">
+							<li class="kt-menu__item {{ Request::is('user-profile*') ? 'kt-menu__item--active' : '' }}" aria-haspopup="true">
+								<a href="user-profile/{{Auth::user()->id}}" class="kt-menu__link ">
 									<i class="kt-menu__link-bullet kt-menu__link-bullet--dot">
 										<span></span>
 									</i>

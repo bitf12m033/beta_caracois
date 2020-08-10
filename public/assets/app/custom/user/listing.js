@@ -37,6 +37,7 @@ var KTDatatablesDataSourceAjaxServer = function() {
 					render: function(data, type, full, meta) {
 						
 						var user_img = full.user_image?full.user_image:'uploads/user/default.png';
+						var address1 = full.address1?full.address1:''
 
 						var output;
 						
@@ -47,7 +48,7 @@ var KTDatatablesDataSourceAjaxServer = function() {
                                     </div>
                                     <div class="kt-user-card-v2__details">
                                         <span class="kt-user-card-v2__name">` + full.name + `</span>
-                                        <a href="#" class="kt-user-card-v2__email kt-link">` + full.address1 + `</a>
+                                        <a href="#" class="kt-user-card-v2__email kt-link">` + address1 + `</a>
                                     </div>
                                 </div>`;
 						
@@ -131,6 +132,16 @@ var KTDatatablesDataSourceAjaxServer = function() {
 
 jQuery(document).ready(function() {
 	KTDatatablesDataSourceAjaxServer.init();
+
+	$.uploadPreview({
+    input_field: "#image-upload",   // Default: .image-upload
+    preview_box: "#image-preview",  // Default: .image-preview
+    label_field: "#image-label",    // Default: .image-label
+    label_default: "Choose File",   // Default: Choose File
+    label_selected: "Change File",  // Default: Change File
+    no_label: false                 // Default: false
+  });
+
 });
 
 function deleteModal(id)
@@ -161,5 +172,5 @@ function deleteModal(id)
 
 
 $("#kt_modal_user_delete").modal("show");
-// $('#myModal').modal('toggle');
+
 }

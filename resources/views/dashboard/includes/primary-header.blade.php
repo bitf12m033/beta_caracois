@@ -940,10 +940,10 @@
 									<div class="kt-header__topbar-user">
 										<span class="kt-header__topbar-welcome kt-hidden-mobile">Hi,</span>
 										<span class="kt-header__topbar-username kt-hidden-mobile">{{ Auth::user()->name }}</span>
-										<img class="kt-hidden" alt="Pic" src="{{ asset('/assets/media/users/300_25.jpg') }}" />
+										<img class="" alt="Pic" src="{{ asset(Auth::user()->user_image) }}" />
 
 										<!--use below badge element instead the user avatar to display username's first letter(remove kt-hidden class to display it) -->
-										<span class="kt-badge kt-badge--username kt-badge--unified-success kt-badge--lg kt-badge--rounded kt-badge--bold">S</span>
+										<span class="kt-hidden kt-badge kt-badge--username kt-badge--unified-success kt-badge--lg kt-badge--rounded kt-badge--bold">S</span>
 									</div>
 								</div>
 								<div class="dropdown-menu dropdown-menu-fit dropdown-menu-right dropdown-menu-anim dropdown-menu-top-unround dropdown-menu-xl">
@@ -951,24 +951,24 @@
 									<!--begin: Head -->
 									<div class="kt-user-card kt-user-card--skin-dark kt-notification-item-padding-x" style="background-image: url(../assets/media/misc/bg-1.jpg)">
 										<div class="kt-user-card__avatar">
-											<img class="kt-hidden" alt="Pic" src="{{ asset('/assets/media/users/300_25.jpg') }}" />
+											<img class="" alt="Pic" src="{{ asset(Auth::user()->user_image) }}" />
 
 											<!--use below badge element instead the user avatar to display username's first letter(remove kt-hidden class to display it) -->
-											<span class="kt-badge kt-badge--lg kt-badge--rounded kt-badge--bold kt-font-success">S</span>
+											<span class=" kt-hidden kt-badge kt-badge--lg kt-badge--rounded kt-badge--bold kt-font-success">S</span>
 										</div>
 										<div class="kt-user-card__name">
-											Sean Stone
+											{{Auth::user()->name}}
 										</div>
-										<div class="kt-user-card__badge">
+										<!-- <div class="kt-user-card__badge">
 											<span class="btn btn-success btn-sm btn-bold btn-font-md">23 messages</span>
-										</div>
+										</div> -->
 									</div>
 
 									<!--end: Head -->
 
 									<!--begin: Navigation -->
 									<div class="kt-notification">
-										<a href="#" class="kt-notification__item">
+										<a href="user-profile/{{Auth::user()->id}}" class="kt-notification__item">
 											<div class="kt-notification__item-icon">
 												<i class="flaticon2-calendar-3 kt-font-success"></i>
 											</div>
@@ -981,7 +981,7 @@
 												</div>
 											</div>
 										</a>
-										<a href="#" class="kt-notification__item">
+										<!-- <a href="#" class="kt-notification__item">
 											<div class="kt-notification__item-icon">
 												<i class="flaticon2-mail kt-font-warning"></i>
 											</div>
@@ -993,8 +993,8 @@
 													Inbox and tasks
 												</div>
 											</div>
-										</a>
-										<a href="#" class="kt-notification__item">
+										</a> -->
+										<!-- <a href="#" class="kt-notification__item">
 											<div class="kt-notification__item-icon">
 												<i class="flaticon2-rocket-1 kt-font-danger"></i>
 											</div>
@@ -1006,8 +1006,8 @@
 													Logs and notifications
 												</div>
 											</div>
-										</a>
-										<a href="#" class="kt-notification__item">
+										</a> -->
+										<!-- <a href="#" class="kt-notification__item">
 											<div class="kt-notification__item-icon">
 												<i class="flaticon2-hourglass kt-font-brand"></i>
 											</div>
@@ -1019,7 +1019,7 @@
 													latest tasks and projects
 												</div>
 											</div>
-										</a>
+										</a> -->
 										<div class="kt-notification__custom">
 											<a href="{{ route('logout') }}"
                                        			onclick="event.preventDefault();

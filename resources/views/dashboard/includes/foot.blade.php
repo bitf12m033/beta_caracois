@@ -118,7 +118,9 @@
 			<script src="{{ asset('/assets/app/custom/product/listing.js') }}" type="text/javascript"></script>
 		@endif
 
-		@if(Request::is('users*'))
+		@if(Request::is('user*'))
+			
+			<script type="text/javascript" src="{{ asset('/js/jquery.uploadPreview.min.js') }}"></script>
 			<!--begin::Product Page Scripts(used by this page) -->
 			<script src="{{ asset('/assets/app/custom/user/listing.js') }}" type="text/javascript"></script>
 

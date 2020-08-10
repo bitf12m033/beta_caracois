@@ -25,7 +25,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/ajax/products', 'ProductController@fetchAllProducts')->name('ajax-products');
 Route::get('/ajax/users', 'UserController@fetchAllUsers')->name('ajax-users');
-
+Route::get('user-profile/{id}', 'ShowProfile');
 /*Route::resource('products', 'ProductController');
 Route::resource('users', 'UserController');*/
 Route::resources([

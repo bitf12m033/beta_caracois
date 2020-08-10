@@ -87,11 +87,12 @@ License: You must have a valid license purchased only from themeforest(the above
 		<!--end::Layout Skins -->
 		<link rel="shortcut icon" href="{{ asset('/assets/media/logos/favicon.ico')}}" />
 
-		@if(Request::is('products*') || Request::is('users*'))
+		@if(Request::is('products*') || Request::is('user*'))
 			<!--begin::Page Vendors Styles(used by this page) -->
 			<link href="{{ asset('/assets/vendors/custom/datatables/datatables.bundle.css') }}" rel="stylesheet" type="text/css" />
 			<!--end::Page Vendors Styles -->
 		@endif
+		<link href="{{ asset('css/custom.css') }}" rel="stylesheet" type="text/css" />
 	</head>
 
 	<!-- end::Head -->
