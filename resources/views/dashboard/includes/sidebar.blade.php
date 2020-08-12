@@ -99,7 +99,7 @@
 								</span>
 							</li>
 							<li class="kt-menu__item {{ Request::is('user-profile*') ? 'kt-menu__item--active' : '' }}" aria-haspopup="true">
-								<a href="user-profile/{{Auth::user()->id}}" class="kt-menu__link ">
+								<a href="/user-profile/{{Auth::user()->id}}" class="kt-menu__link ">
 									<i class="kt-menu__link-bullet kt-menu__link-bullet--dot">
 										<span></span>
 									</i>

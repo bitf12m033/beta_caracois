@@ -97,7 +97,8 @@ License: You must have a valid license purchased only from themeforest(the above
 									<h3 class="kt-login__title">Forgotten Password ?</h3>
 									<div class="kt-login__desc">Enter your email to reset your password:</div>
 								</div>
-								<form class="kt-form" action="">
+								<form class="kt-form" action="{{ route('password.email') }}">
+									@csrf
 									<div class="input-group">
 										<input class="form-control" type="text" placeholder="Email" name="email" id="kt_email" autocomplete="off">
 									</div>

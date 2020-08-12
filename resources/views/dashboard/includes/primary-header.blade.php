@@ -968,7 +968,7 @@
 
 									<!--begin: Navigation -->
 									<div class="kt-notification">
-										<a href="user-profile/{{Auth::user()->id}}" class="kt-notification__item">
+										<a href="/user-profile/{{Auth::user()->id}}" class="kt-notification__item">
 											<div class="kt-notification__item-icon">
 												<i class="flaticon2-calendar-3 kt-font-success"></i>
 											</div>
