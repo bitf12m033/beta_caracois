@@ -110,7 +110,7 @@ jQuery(document).ready(function() {
 
 function deleteModal(id)
 {
-	var modal = '<div class="modal fade" id="kt_modal_1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">\
+	/*var modal = '<div class="modal fade" id="kt_modal_1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">\
 				<div class="modal-dialog" role="document">\
 					<div class="modal-content">\
 						<div class="modal-header">\
@@ -131,9 +131,10 @@ function deleteModal(id)
 						</div>\
 					</div>\
 				</div>\
-			</div>';
-$('body').append(modal);
+			</div>';*/
 
-$("#kt_modal_1").modal("show");
-// $('#myModal').modal('toggle');
+$('#kt_modal_product_delete form').attr("action","products/"+id);
+
+
+$("#kt_modal_product_delete").modal("show");
 }

@@ -146,31 +146,6 @@ jQuery(document).ready(function() {
 
 function deleteModal(id)
 {
-/*	var modal = '<div class="modal fade" id="kt_modal_1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">\
-				<div class="modal-dialog" role="document">\
-					<div class="modal-content">\
-						<div class="modal-header">\
-							<h5 class="modal-title" id="exampleModalLabel">Deleting User</h5>\
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close">\
-							</button>\
-						</div>\
-						<div class="modal-body">\
-							<p>Are you sure?Do you really want to delete this?.</p>\
-						</div>\
-						<div class="modal-footer">\
-							<form action="users/'+id+'" method="POST">\
-							<input type="hidden" name="_token" value="zhinwXNmwHZB9l8uPr8KQLOCfuNKRW4QG6D5FVSz">\
-							<input type="hidden" name="_method" value="DELETE">\
-							<button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>\
-							<button type="submit" class="btn btn-danger">Yes</button>\
-							</form>\
-						</div>\
-					</div>\
-				</div>\
-			</div>';*/
 	$('#kt_modal_user_delete form').attr("action","users/"+id);
-
-
-$("#kt_modal_user_delete").modal("show");
-
+	$("#kt_modal_user_delete").modal("show");
 }
