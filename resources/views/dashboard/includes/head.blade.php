@@ -79,20 +79,37 @@ License: You must have a valid license purchased only from themeforest(the above
 		<!--end::Global Theme Styles -->
 
 		<!--begin::Layout Skins(used by all pages) -->
+
 		<link href="{{ asset('/assets/demo/default/skins/header/base/light.css') }}" rel="stylesheet" type="text/css" />
 		<link href="{{ asset('/assets/demo/default/skins/header/menu/light.css') }}" rel="stylesheet" type="text/css" />
 		<link href="{{ asset('/assets/demo/default/skins/brand/dark.css') }}" rel="stylesheet" type="text/css" />
 		<link href="{{ asset('/assets/demo/default/skins/aside/dark.css') }}" rel="stylesheet" type="text/css" />
-
 		<!--end::Layout Skins -->
 		<link rel="shortcut icon" href="{{ asset('/assets/media/logos/favicon.ico')}}" />
 
-		@if(Request::is('products*') || Request::is('user*'))
+
 			<!--begin::Page Vendors Styles(used by this page) -->
 			<link href="{{ asset('/assets/vendors/custom/datatables/datatables.bundle.css') }}" rel="stylesheet" type="text/css" />
 			<!--end::Page Vendors Styles -->
-		@endif
+
 		<link href="{{ asset('css/custom.css') }}" rel="stylesheet" type="text/css" />
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}">
+
+
+
+
+
+
+		<style>
+			.kbw-signature { width: 100%; height: 200px;}
+			#sig canvas{
+				width: 466px; !important;
+				height: auto;
+			}
+		</style>
+		@toastr_css
 	</head>
 
 	<!-- end::Head -->

@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\OrderProducts;
 use App\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
@@ -193,4 +195,154 @@ class ProductController extends Controller
         }
         return response()->json($response);
     }
+    public function productAjax(Request $request)
+    {
+        $data = [];
+
+        if($request->has('q')){
+            $search = $request->q;
+            $data = DB::table("products")
+                ->select("id","product_name","sell_price")
+                ->where('name','LIKE',"%$search%")
+                ->whereNull('deleted_at')
+                ->get();
+        }
+        else
+        {
+            $data = DB::table("products")
+                ->select("id","product_name","sell_price")
+                ->whereNull('deleted_at')
+                ->get();
+        }
+        return response()->json($data);
+    }
+    public function addToCart(Request $request,$id)
+    {
+        $product = Product::find($id);
+
+        if(!$product) {
+
+            abort(404);
+
+        }
+
+        $cart = session()->get('cart');
+
+        // if cart is empty then this the first product
+        if(!$cart) {
+
+            $cart = [
+                $id => [
+                    "product_id" => $id,
+                    "name" => $product->product_name,
+                    "quantity" => 1,
+                    "price" => $product->sell_price,
+                    /*"photo" => $product->photo*/
+                ]
+            ];
+
+            session()->put('cart', $cart);
+            return redirect()->back()->with('success', 'Product added to cart successfully!');
+        }
+
+        // if cart not empty then check if this product exist then increment quantity
+        if(isset($cart[$id])) {
+
+            $cart[$id]['quantity']++;
+
+            session()->put('cart', $cart);
+
+            return redirect()->back()->with('success', 'Product added to cart successfully!');
+
+        }
+
+        // if item not exist in cart then add to cart with quantity = 1
+        $cart[$id] = [
+            "product_id" => $id,
+            "name" => $product->product_name,
+            "quantity" => 1,
+            "price" => $product->sell_price,
+            /*"photo" => $product->photo*/
+        ];
+
+        session()->put('cart', $cart);
+
+        return redirect()->back()->with('success', 'Product added to cart successfully!');
+    }
+    public function cart()
+    {
+        return view('orders.cart');
+    }
+    public function update_cart(Request $request)
+    {
+        if($request->id and $request->quantity)
+        {
+            $cart = session()->get('cart');
+
+            $cart[$request->id]["quantity"] = $request->quantity;
+
+            session()->put('cart', $cart);
+
+            session()->flash('success', 'Cart updated successfully');
+        }
+    }
+    public function remove_cart(Request $request)
+    {
+        if($request->id) {
+
+            $cart = session()->get('cart');
+
+            if(isset($cart[$request->id])) {
+
+                unset($cart[$request->id]);
+
+                session()->put('cart', $cart);
+            }
+
+            session()->flash('success', 'Product removed successfully');
+        }
+    }
+    public function order_products(Request $request)
+    {
+        $orders = OrderProducts::where('order_id',$request->order_id)->get();
+        // return $request->shift_id;
+        $html =  '<table class="table table-hover nowrap">
+                   <thead class="thead-default">
+                            <tr>
+                            <th>Brand name</th>
+                            <th>Product name</th>
+                            <th>Category</th>
+                            <th>Price</th>
+                             <th>Quantity</th>
+                            </tr>
+                </thead>
+                  <tbody> ';
+        foreach ($orders as $shift)
+        {
+            $html .= '<tr>';
+            $html .= '<td>';
+                $html .=  $shift->product->brand_name;
+            $html .= '</td>';
+            $html .= '<td>';
+                $html .=  $shift->product->product_name;
+            $html .= '</td>';
+            $html .= '<td>';
+            $html .=  $shift->product->category;
+            $html .= '</td>';
+            $html .= '<td>';
+            $html .=  $shift->product->sell_price;
+            $html .= '</td>';
+            $html .= '<td>';
+            $html .=  $shift->quantity;
+            $html .= '</td>';
+
+            $html .= '</td>';
+            $html .= '</tr>';
+        }
+        $html .= '</tbody>
+            </table>';
+        return $html;
+        die;
+    }
+
 }

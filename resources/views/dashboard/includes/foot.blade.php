@@ -26,6 +26,8 @@
 
 		<!--begin:: Global Mandatory Vendors -->
 		<script src="{{ asset('/assets/vendors/general/jquery/dist/jquery.js') }}" type="text/javascript"></script>
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+		<script src="{{ asset('/assets/vendors/custom/jquery-ui/jquery.signature.js') }}" type="text/javascript"></script>
 		<script src="{{ asset('/assets/vendors/general/popper.js/dist/umd/popper.js') }}" type="text/javascript"></script>
 		<script src="{{ asset('/assets/vendors/general/bootstrap/dist/js/bootstrap.min.js') }}" type="text/javascript"></script>
 		<script src="{{ asset('/assets/vendors/general/js-cookie/src/js.cookie.js') }}" type="text/javascript"></script>
@@ -89,6 +91,7 @@
 		<script src="{{ asset('/assets/vendors/general/jquery.repeater/src/repeater.js') }}" type="text/javascript"></script>
 		<script src="{{ asset('/assets/vendors/general/dompurify/dist/purify.js') }}" type="text/javascript"></script>
 
+
 		<!--end:: Global Optional Vendors -->
 
 		<!--begin::Global Theme Bundle(used by all pages) -->
@@ -137,4 +140,6 @@
 
 		<!--begin::Global App Bundle(used by all pages) -->
 		<script src="{{ asset('/assets/app/bundle/app.bundle.js') }}" type="text/javascript"></script>
+		<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+
 		<!--end::Global App Bundle -->

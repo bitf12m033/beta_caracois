@@ -455,7 +455,7 @@
 		<!-- end::Scrolltop -->
 
 		<!-- begin::Sticky Toolbar -->
-		<ul class="kt-sticky-toolbar" style="margin-top: 30px;">
+		{{--<ul class="kt-sticky-toolbar" style="margin-top: 30px;">
 			<li class="kt-sticky-toolbar__item kt-sticky-toolbar__item--success" id="kt_demo_panel_toggle" data-toggle="kt-tooltip" title="Check out more demos" data-placement="right">
 				<a href="#" class=""><i class="flaticon2-drop"></i></a>
 			</li>
@@ -465,7 +465,7 @@
 			<li class="kt-sticky-toolbar__item kt-sticky-toolbar__item--warning" data-toggle="kt-tooltip" title="Documentation" data-placement="left">
 				<a href="https://keenthemes.com/metronic/?page=docs" target="_blank"><i class="flaticon2-telegram-logo"></i></a>
 			</li>
-		</ul>
+		</ul>--}}
 
 		<!-- end::Sticky Toolbar -->
 
@@ -641,7 +641,10 @@
 		</div>
 
 		@include('dashboard.includes.foot')
-	</body>
+		@yield('scripts')
 
+	</body>
+	@toastr_js
+	@toastr_render
 	<!-- end::Body -->
 </html>

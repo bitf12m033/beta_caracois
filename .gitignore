@@ -1,3 +1,5 @@
+# Add any directories, files, or patterns you don't want to be tracked by version control
+
 /node_modules
 /public/hot
 /public/storage
@@ -11,3 +13,18 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
+
+
+storage/logs/*.log
+.idea
+.idea/workspace.xml
+.vagrant
+/bootstrap/compiled.php
+/build/logs
+/build/coverage
+/app/tests/_log
+composer.phar
+.DS_Store
+/_ide_helper.php
+/app/config/packages
+/public/packages
