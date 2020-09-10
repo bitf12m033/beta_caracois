@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Rules\MatchOldPassword;
 use Illuminate\Http\Request;
 use App\User;
 Use Carbon\Carbon;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -217,5 +219,23 @@ class UserController extends Controller
            
         }
         return response()->json($response);
+    }
+    public function changepassword()
+    {
+        return view('auth.changepassword');
+    }
+    public function updatepassword(Request $request)
+    {
+        // dd($request->all());
+        $request->validate([
+            'current_password' => ['required', new MatchOldPassword],
+            'new_password' => ['required', 'string', 'min:8'],
+            'confirm_password' => ['same:new_password'],
+        ]);
+
+        User::find(auth()->user()->id)->update(['password'=> Hash::make($request->new_password)]);
+
+        toastr()->success('Password changed successfully.', 'Success!!');
+        return redirect()->back();
     }
 }

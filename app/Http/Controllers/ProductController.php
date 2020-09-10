@@ -107,7 +107,7 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        
+
         return view('dashboard.product.edit',compact("product"));
     }
 
@@ -275,6 +275,8 @@ class ProductController extends Controller
     }
     public function update_cart(Request $request)
     {
+        //dd(session('cart') );
+       // dd($request->all());
         if($request->id and $request->quantity)
         {
             $cart = session()->get('cart');
@@ -285,6 +287,7 @@ class ProductController extends Controller
 
             session()->flash('success', 'Cart updated successfully');
         }
+
     }
     public function remove_cart(Request $request)
     {
