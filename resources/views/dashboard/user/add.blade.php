@@ -26,11 +26,19 @@
 								Back
 							</a>
 							&nbsp;
-							
 						</div>
 					</div>
 				</div>
-
+				@if ($errors->any())
+					<div class="alert alert-danger">
+						<strong>Whoops!</strong> There were some problems with your input.<br><br>
+						<ul>
+							@foreach ($errors->all() as $error)
+								<li>{{ $error }}</li>
+							@endforeach
+						</ul>
+					</div>
+			@endif
 				<!--begin::Form-->
 				<form class="kt-form kt-form--label-right" method="POST" action="{!! route('users.store') !!}" enctype="multipart/form-data">
 					@csrf
@@ -118,6 +126,10 @@
 									</label>
 									<label class="kt-radio kt-radio--solid">
 										<input type="radio" name="role_type" value="customer"> Customer
+										<span></span>
+									</label>
+									<label class="kt-radio kt-radio--solid">
+										<input type="radio" name="role_type" value="delivery"> Delivery Person
 										<span></span>
 									</label>
 								</div>

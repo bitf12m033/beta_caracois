@@ -115,13 +115,14 @@
 								<!-- <span class="form-text text-muted">Please enter your postcode</span> -->
 							</div>
 							<div class="col-lg-4">
-								<label for="password">Password</label>
+								<label for="password">New Password</label>
 								<div class="kt-input-icon kt-input-icon--right">
-									<input type="text" id="password" value="{{$user->password}}" name="password" class="form-control" placeholder="Enter password">
+									<input type="text" id="password" name="password" class="form-control" placeholder="Reset password">
 									<span class="kt-input-icon__icon kt-input-icon__icon--right"><span><i class="la la-bookmark-o"></i></span></span>
 								</div>
 								<!-- <span class="form-text text-muted">Please enter your postcode</span> -->
 							</div>
+							@if(\Illuminate\Support\Facades\Auth::user()->role_type == 'admin')
 							<div class="col-lg-4">
 								<label class="">User Group:</label>
 								<div class="kt-radio-inline">
@@ -136,6 +137,7 @@
 								</div>
 								<span class="form-text text-muted">Please select user group</span>
 							</div>
+								@endif
 						</div>
 
 						<div class="form-group row">

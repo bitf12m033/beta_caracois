@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\OrderProducts;
 use App\Product;
+use Carbon\Carbon;
+use Faker\Provider\DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -198,19 +200,21 @@ class ProductController extends Controller
     public function productAjax(Request $request)
     {
         $data = [];
-
         if($request->has('q')){
             $search = $request->q;
             $data = DB::table("products")
                 ->select("id","product_name","sell_price")
-                ->where('name','LIKE',"%$search%")
+                ->where('product_name','LIKE',"%$search%")
+                ->where('is_active','1')
                 ->whereNull('deleted_at')
                 ->get();
         }
         else
         {
             $data = DB::table("products")
-                ->select("id","product_name","sell_price")
+                ->select("id","product_name","sell_price","expired_date")
+             /*   ->where(Carbon::parse('expired_date'), '>=',Carbon::now()->format('m/d/Y'))*/
+                ->where('is_active','1')
                 ->whereNull('deleted_at')
                 ->get();
         }

@@ -6,6 +6,7 @@ use App\Rules\MatchOldPassword;
 use Illuminate\Http\Request;
 use App\User;
 Use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -47,12 +48,11 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        
+       // dd($request->all());
         $request->validate([
             'name' => 'required',
-            'email' => 'required',
+            'email' =>'required|unique:users',
             'phone' => 'required',
-            'password' => 'required',
             'zip' => 'required',
             'state' => 'required',
             'dob' => 'required',
@@ -77,17 +77,16 @@ class UserController extends Controller
         $user->address2 = $request->input('address2');
         $user->dob = Carbon::parse($request->input('dob'))->format('Y-m-d');
         $user->role_type = $request->input('role_type');
-        $user->password = $request->input('password');
+        if($request->input('password'))
+        $user->password = Hash::make($request->input('password'));
         $user->user_image = $path;
         
         // dd($product);
         $user->save();
         //sign them in
-        $notification = [
-            'message' => 'User is added successfully.!',
-            'alert-type' => 'success'
-        ];
-        return redirect('/users')->with($notification);
+        toastr()->error('User is added successfully.!', 'Success!');
+        return redirect()->back();
+     //   return redirect('/users')->with($notification);
 
     }
 
@@ -125,7 +124,7 @@ class UserController extends Controller
     {
          $request->validate([
             'name' => 'required',
-            'email' => 'required',
+            'email' => 'required|unique:users',
             'phone' => 'required',
             'password' => 'required',
             'zip' => 'required',
@@ -154,7 +153,7 @@ class UserController extends Controller
         $user->address2 = $request->input('address2');
         $user->dob = Carbon::parse($request->input('dob'))->format('Y-m-d');
         $user->role_type = $request->input('role_type');
-        $user->password = $request->input('password');
+        $user->password = Hash::make($request->input('password'));
         $user->user_image = $path;
         
         // dd($product);
@@ -178,8 +177,8 @@ class UserController extends Controller
     {
         $user->delete();
 
-        return redirect()->route('users.index')
-                        ->with('success','User deleted successfully');
+        toastr()->error('User is Deleted successfully.!', 'Success!');
+        return redirect()->back();
 
     }
 
@@ -238,4 +237,31 @@ class UserController extends Controller
         toastr()->success('Password changed successfully.', 'Success!!');
         return redirect()->back();
     }
+    public function delivery_boys()
+    {
+        DB::statement(DB::raw('set @rownum=0'));
+
+        /*   $e_date = Carbon::parse($product->expired_date)->format('Y-m-d');
+           $t_day = Carbon::now()->format('Y-m-d');*/
+
+        $users = User::where('deleted_at',null)->where('role_type','delivery')->get(['users.*',
+            DB::raw('@rownum  := @rownum  + 1 AS rownum')]);
+        $title = 'Delivery Persons';
+
+        return view('dashboard.user.delivery_boy',compact('users','title'));
+    }
+    public function all_customers()
+    {
+        DB::statement(DB::raw('set @rownum=0'));
+
+        /*   $e_date = Carbon::parse($product->expired_date)->format('Y-m-d');
+           $t_day = Carbon::now()->format('Y-m-d');*/
+
+        $users = User::where('deleted_at',null)->where('role_type','customer')->get(['users.*',
+            DB::raw('@rownum  := @rownum  + 1 AS rownum')]);
+
+        $title = 'Customers';
+        return view('dashboard.user.delivery_boy',compact('users','title'));
+    }
+
 }
