@@ -18,12 +18,12 @@
 					</div>
 					<div class="kt-portlet__head-toolbar">
 						<div class="kt-portlet__head-wrapper">
+							@if(\Illuminate\Support\Facades\Auth::user()->role_type == 'admin')
 							<a href="{!! route('users.index') !!}" class="btn btn-clean btn-icon-sm">
 								<i class="la la-long-arrow-left"></i>
 								Back
 							</a>
-							&nbsp;
-							
+							&nbsp;@endif
 						</div>
 					</div>
 				</div>
@@ -68,7 +68,7 @@
 							<div class="col-lg-4">
 								<label class="">Date Of Birth</label>
 								<div class="input-group date">
-									<input readonly type="text" name="dob" class="form-control" readonly value="{{\Carbon\Carbon::parse($user->dob)->format('m/d/Y')}}" id="dob" />
+									<input  type="text" name="dob" class="form-control" readonly value="{{\Carbon\Carbon::parse($user->dob)->format('m/d/Y')}}" id="dob" />
 									<div class="input-group-append">
 										<span class="input-group-text">
 											<i class="la la-calendar"></i>
@@ -112,7 +112,7 @@
 								</div>
 								<!-- <span class="form-text text-muted">Please enter your postcode</span> -->
 							</div>
-							
+							@if(\Illuminate\Support\Facades\Auth::user()->role_type == 'admin')
 							<div class="col-lg-6">
 								<label class="">User Group:</label>
 								<div class="kt-radio-inline">
@@ -127,6 +127,7 @@
 								</div>
 								<span class="form-text text-muted">Please select user group</span>
 							</div>
+								@endif
 						</div>
 
 						<div class="form-group row">

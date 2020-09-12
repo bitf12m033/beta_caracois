@@ -127,10 +127,12 @@
                                 @endif
                             </td>
                             <td style="width:250px;">
+                                &nbsp;@if(\Illuminate\Support\Facades\Auth::check() && \Illuminate\Support\Facades\Auth::user()->role_type == 'admin')
                                 <a href="{{ route('orders.edit',$order->id ) }}" ><i class="la la-edit"></i></a>
                                 {!! Form::open(['method' => 'DELETE','route' => ['orders.destroy', $order->id],'style'=>'display:inline','role'=>'form','onsubmit' => 'return confirm(" Do you want to delete this Order?")']) !!}
                                 <a href="#" onclick="$(this).closest('form').submit()"><i class="la la-trash"></i></a>
                                 {!! Form::close() !!}
+                                @endif
                                 <a href="javascript:void(0);" data-toggle="tooltip" data-original-title="Click to Change Status"   class="btn btn-primary" data-cost="{{ $order->id }}"  onClick="change_order_status({{$order->id }})"> Update</a>
                             </td>
                         </tr>

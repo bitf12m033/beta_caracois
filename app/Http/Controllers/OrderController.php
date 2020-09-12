@@ -82,6 +82,7 @@ class OrderController extends Controller
             $user->password = Hash::make($password);
             $user->role_type = 'customer';
             $user->address1 = $request->customer_add;
+            $user->phone = '+'.$request->contact_num;
             $user->save();
 
             $email_data['name'] = $user->name;
@@ -126,6 +127,16 @@ class OrderController extends Controller
             $pro->product_id = $details['product_id'];
             $pro->quantity = $details['quantity'];
             $pro->save();
+
+            $remaining  =  Product::where('id', $pro->product_id)->first();
+            $tot =  $remaining->quantity_left;
+            $remaining->quantity_left = $tot - $pro->quantity;
+            if( $remaining->quantity_left <= 0)
+            {
+                $remaining->is_active = 0 ;
+            }
+            $remaining->save();
+
         }
 
 

@@ -30,7 +30,9 @@ Route::group(['middleware' => 'App\Http\Middleware\AdminMiddleware'], function()
 {
     Route::get('/ajax/products', 'ProductController@fetchAllProducts')->name('ajax-products');
     Route::get('/ajax/users', 'UserController@fetchAllUsers')->name('ajax-users');
-    Route::get('user-profile/{id}', 'ShowProfile');
+    Route::get('delivery-persons', 'UserController@delivery_boys')->name('delivery-persons');
+    Route::get('all-customers', 'UserController@all_customers')->name('all-customers');
+
     /*Route::resource('products', 'ProductController');
     Route::resource('users', 'UserController');*/
     Route::resources([
@@ -40,10 +42,16 @@ Route::group(['middleware' => 'App\Http\Middleware\AdminMiddleware'], function()
     ]);
 });
 
+Route::group(['middleware' => 'App\Http\Middleware\DeliveryBoyMiddleware'], function()
+{
+    Route::get('delivery-orders', 'OrderController@index')->name('delivery-orders');
+});
+
 Route::group(['middleware'=> 'auth'], function()
 {
     Route::resources([
         'customerorder' => 'CustomerOrder',
+        'customer-products' => 'CustomerProductController',
     ]);
     Route::patch('update-cart', 'ProductController@update_cart');
     Route::delete('remove-from-cart', 'ProductController@remove_cart');
@@ -55,6 +63,10 @@ Route::group(['middleware'=> 'auth'], function()
     Route::get('order_product-ajax', 'ProductController@order_products')->name('all_order_product');
     Route::get('changepassword', 'UserController@changepassword')->name('changepassword');
     Route::post('updatepassword', 'UserController@updatepassword')->name('password.update');
+
+    Route::get('customer-cart', 'CustomerProductController@cart')->name('customer.order.cart');
+    Route::get('user-profile/{id}', 'ShowProfile');
+
 });
 Route::get('/send/email', function () {
     $mail_data['name'] = 'test';

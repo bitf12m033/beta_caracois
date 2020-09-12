@@ -24,60 +24,60 @@
 					<i class="kt-font-brand flaticon2-line-chart"></i>
 				</span>
                     <h3 class="kt-portlet__head-title">
-                        Orders Listing
+                         Available Products
                     </h3>
                 </div>
                 <div class="kt-portlet__head-toolbar">
                     <div class="kt-portlet__head-wrapper">
                         <div class="kt-portlet__head-actions">
-                         {{--   <div class="dropdown dropdown-inline">
-                                <button type="button" class="btn btn-default btn-icon-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="la la-download"></i> Export
-                                </button>
-                                <div class="dropdown-menu dropdown-menu-right">
-                                    <ul class="kt-nav">
-                                        <li class="kt-nav__section kt-nav__section--first">
-                                            <span class="kt-nav__section-text">Choose an option</span>
-                                        </li>
-                                        <li class="kt-nav__item">
-                                            <a href="#" class="kt-nav__link">
-                                                <i class="kt-nav__link-icon la la-print"></i>
-                                                <span class="kt-nav__link-text">Print</span>
-                                            </a>
-                                        </li>
-                                        <li class="kt-nav__item">
-                                            <a href="#" class="kt-nav__link">
-                                                <i class="kt-nav__link-icon la la-copy"></i>
-                                                <span class="kt-nav__link-text">Copy</span>
-                                            </a>
-                                        </li>
-                                        <li class="kt-nav__item">
-                                            <a href="#" class="kt-nav__link">
-                                                <i class="kt-nav__link-icon la la-file-excel-o"></i>
-                                                <span class="kt-nav__link-text">Excel</span>
-                                            </a>
-                                        </li>
-                                        <li class="kt-nav__item">
-                                            <a href="#" class="kt-nav__link">
-                                                <i class="kt-nav__link-icon la la-file-text-o"></i>
-                                                <span class="kt-nav__link-text">CSV</span>
-                                            </a>
-                                        </li>
-                                        <li class="kt-nav__item">
-                                            <a href="#" class="kt-nav__link">
-                                                <i class="kt-nav__link-icon la la-file-pdf-o"></i>
-                                                <span class="kt-nav__link-text">PDF</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>--}}
-
-                            <a href="{{ route('customer.order.cart')}}" class="btn btn-brand btn-elevate btn-icon-sm">
-                                <i class="la la-plus"></i>
-                                New Order
-                            </a>
-
+                            {{--   <div class="dropdown dropdown-inline">
+                                   <button type="button" class="btn btn-default btn-icon-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                       <i class="la la-download"></i> Export
+                                   </button>
+                                   <div class="dropdown-menu dropdown-menu-right">
+                                       <ul class="kt-nav">
+                                           <li class="kt-nav__section kt-nav__section--first">
+                                               <span class="kt-nav__section-text">Choose an option</span>
+                                           </li>
+                                           <li class="kt-nav__item">
+                                               <a href="#" class="kt-nav__link">
+                                                   <i class="kt-nav__link-icon la la-print"></i>
+                                                   <span class="kt-nav__link-text">Print</span>
+                                               </a>
+                                           </li>
+                                           <li class="kt-nav__item">
+                                               <a href="#" class="kt-nav__link">
+                                                   <i class="kt-nav__link-icon la la-copy"></i>
+                                                   <span class="kt-nav__link-text">Copy</span>
+                                               </a>
+                                           </li>
+                                           <li class="kt-nav__item">
+                                               <a href="#" class="kt-nav__link">
+                                                   <i class="kt-nav__link-icon la la-file-excel-o"></i>
+                                                   <span class="kt-nav__link-text">Excel</span>
+                                               </a>
+                                           </li>
+                                           <li class="kt-nav__item">
+                                               <a href="#" class="kt-nav__link">
+                                                   <i class="kt-nav__link-icon la la-file-text-o"></i>
+                                                   <span class="kt-nav__link-text">CSV</span>
+                                               </a>
+                                           </li>
+                                           <li class="kt-nav__item">
+                                               <a href="#" class="kt-nav__link">
+                                                   <i class="kt-nav__link-icon la la-file-pdf-o"></i>
+                                                   <span class="kt-nav__link-text">PDF</span>
+                                               </a>
+                                           </li>
+                                       </ul>
+                                   </div>
+                               </div>--}}
+                            &nbsp;@if(\Illuminate\Support\Facades\Auth::check() && \Illuminate\Support\Facades\Auth::user()->role_type == 'admin')
+                                <a href="{{ route('order.cart')}}" class="btn btn-brand btn-elevate btn-icon-sm">
+                                    <i class="la la-plus"></i>
+                                    New Order
+                                </a>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -89,36 +89,28 @@
                     <thead class="thead-default">
                     <tr>
                         <th>ID</th>
-                        <th>Customer Name</th>
-                        <th>Address</th>
-                        <th>Phone</th>
-                        <th>Products</th>
+                        <th>Name</th>
+                        <th>Remaining Quantity</th>
                         <th>Price</th>
-                        <th>Delivery Status</th>
-                        <th>Payment Status</th>
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($orders as $order)
+                    <?php  $i=1; ?>
+                    @foreach($products as $product)
+                        <?php
+                        $e_date = \Carbon\Carbon::parse($product->expired_date)->format('Y-m-d');
+                        $t_day = \Carbon\Carbon::now()->format('Y-m-d');
+                        ?>
+                        @if($e_date >= $t_day )
                         <tr>
-                            <td>{{ $order->rownum }}</td>
-                            <td>{{ $order->customer_name }}</td>
-                            <td>{{ $order->customer_address }}</td>
-                            <td>{{ $order->customer_phone }}</td>
-                            <td> <a href="javascript:void(0);" data-href="{!! route('all_order_product', ['order_id'=>$order->id]) !!}" class="openPopup"><i class="fa fa-eye" aria-hidden="true"></i></a> </td>
-                            <td>{{ $order->total_amount }}</td>
-                            <td>@if($order->order_status == 0)<span class="kt-badge kt-badge--dark kt-badge--inline kt-badge--pill kt-badge--rounded">pending</span>
-                                @else
-                                    <span class="kt-badge kt-badge--danger kt-badge--inline kt-badge--pill kt-badge--rounded">completed</span>
-                                @endif</td>
-                            <td>@if($order->payment_status == 0)<span class="kt-badge kt-badge--dark kt-badge--inline kt-badge--pill kt-badge--rounded">pending</span>
-                                @else
-                                    <span class="kt-badge kt-badge--danger kt-badge--inline kt-badge--pill kt-badge--rounded">
-                                        completed
-                                    </span>
-                                @endif</td>
+                            <td>{{ $i }}  </td>
+                            <td>{{ $product->product_name }}</td>
+                            <td>{{ $product->quantity_left }}</td>
+                            <td>{{ $product->sell_price }}</td>
                         </tr>
-                        @endforeach
+                            <?php $i++ ?>
+                        @endif
+                    @endforeach
                     </tbody>
 
                 </table>
@@ -199,36 +191,36 @@
                         <strong>Success!</strong> Shift Timings has been updated successfully.
                     </div>
                     <form action="" id="order_status_form" method="post" enctype="multipart/form-data">
-                    <div class="col-md-12">
-                        <label class="" for="">Signature:</label>
-                        <br/>
-                        <div id="signature-pad" class="jay-signature-pad">
-                            <div class="jay-signature-pad--body">
-                                <canvas id="jay-signature-pad"  width="400" height="280" style="border:1px solid"></canvas>
-                            </div>
-                            <div class="signature-pad--footer txt-center">
-                                <div class="description"><strong> SIGN ABOVE </strong></div>
-                                <div class="signature-pad--actions txt-center">
-                                    <div>
-                                        <button type="button" class="button clear btn btn-success" data-action="clear">Clear</button>
-                                        {{--<button type="button" class="button" data-action="change-color">Change color</button>--}}
-                                    </div><br/>
-                                    {{--<div>
-                                        <button type="button" class="button save" data-action="save-png">Save as PNG</button>
-                                        <button type="button" class="button save" data-action="save-jpg">Save as JPG</button>
-                                        <button type="button" class="button save" data-action="save-svg">Save as SVG</button>
-                                    </div>--}}
+                        <div class="col-md-12">
+                            <label class="" for="">Signature:</label>
+                            <br/>
+                            <div id="signature-pad" class="jay-signature-pad">
+                                <div class="jay-signature-pad--body">
+                                    <canvas id="jay-signature-pad"  width="400" height="280" style="border:1px solid"></canvas>
+                                </div>
+                                <div class="signature-pad--footer txt-center">
+                                    <div class="description"><strong> SIGN ABOVE </strong></div>
+                                    <div class="signature-pad--actions txt-center">
+                                        <div>
+                                            <button type="button" class="button clear btn btn-success" data-action="clear">Clear</button>
+                                            {{--<button type="button" class="button" data-action="change-color">Change color</button>--}}
+                                        </div><br/>
+                                        {{--<div>
+                                            <button type="button" class="button save" data-action="save-png">Save as PNG</button>
+                                            <button type="button" class="button save" data-action="save-jpg">Save as JPG</button>
+                                            <button type="button" class="button save" data-action="save-svg">Save as SVG</button>
+                                        </div>--}}
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
                         <input type="checkbox" id="payment_received" name="payment_received" value="1" checked>
                         <label for="payment_received"> Payment Received</label><br>
-                  {{--  <button class="btn btn-success">Save</button> <br>--}}
-                    <input type="hidden" id="order_id" name="order_id">
+                        {{--  <button class="btn btn-success">Save</button> <br>--}}
+                        <input type="hidden" id="order_id" name="order_id">
                         <br/>
-                    <button type="submit" class="btn btn-success">Update Order Status</button>
+                        <button type="submit" class="btn btn-success">Update Order Status</button>
                     </form>
                 </div>
             </div>
@@ -240,14 +232,14 @@
     <script>
         function image_large(srrc){
 
-                $("#warning_alert").css('display','block');
-                $("#success_alert").css('display','none');
-                $('.tooltip').not(this).hide();
-                var modalImg = document.getElementById("img01");
-                modalImg.src = srrc;
-                $("#sig_Modal").modal();
+            $("#warning_alert").css('display','block');
+            $("#success_alert").css('display','none');
+            $('.tooltip').not(this).hide();
+            var modalImg = document.getElementById("img01");
+            modalImg.src = srrc;
+            $("#sig_Modal").modal();
 
-                debugger;
+            debugger;
         }
 
     </script>
@@ -316,13 +308,13 @@
         clearButton.addEventListener("click", function (event) {
             signaturePad.clear();
         });
-     /*   changeColorButton.addEventListener("click", function (event) {
-            var r = Math.round(Math.random() * 255);
-            var g = Math.round(Math.random() * 255);
-            var b = Math.round(Math.random() * 255);
-            var color = "rgb(" + r + "," + g + "," + b +")";
-            signaturePad.penColor = color;
-        });*/
+        /*   changeColorButton.addEventListener("click", function (event) {
+               var r = Math.round(Math.random() * 255);
+               var g = Math.round(Math.random() * 255);
+               var b = Math.round(Math.random() * 255);
+               var color = "rgb(" + r + "," + g + "," + b +")";
+               signaturePad.penColor = color;
+           });*/
         savePNGButton.addEventListener("click", function (event) {
             if (signaturePad.isEmpty()) {
                 alert("Please provide a signature first.");

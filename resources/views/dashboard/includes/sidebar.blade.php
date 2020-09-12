@@ -70,7 +70,25 @@
 						<span class="kt-menu__link-text">Products</span>
 					</a>
 				</li>
+					@else
+					@if(\Illuminate\Support\Facades\Auth::check() && \Illuminate\Support\Facades\Auth::user()->role_type == 'customer')
+					<li class="kt-menu__item {{ Request::is('customer-products*') ? 'kt-menu__item--active' : '' }}" aria-haspopup="true">
+						<a  href="{{ url('customer-products') }}" class="kt-menu__link ">
+						<span class="kt-menu__link-icon">
+							<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
+								<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+									<rect id="bound" x="0" y="0" width="24" height="24" />
+									<path d="M5,3 L6,3 C6.55228475,3 7,3.44771525 7,4 L7,20 C7,20.5522847 6.55228475,21 6,21 L5,21 C4.44771525,21 4,20.5522847 4,20 L4,4 C4,3.44771525 4.44771525,3 5,3 Z M10,3 L11,3 C11.5522847,3 12,3.44771525 12,4 L12,20 C12,20.5522847 11.5522847,21 11,21 L10,21 C9.44771525,21 9,20.5522847 9,20 L9,4 C9,3.44771525 9.44771525,3 10,3 Z" id="Combined-Shape" fill="#000000" />
+									<rect id="Rectangle-Copy-2" fill="#000000" opacity="0.3" transform="translate(17.825568, 11.945519) rotate(-19.000000) translate(-17.825568, -11.945519) " x="16.3255682" y="2.94551858" width="3" height="18" rx="1" />
+								</g>
+							</svg>
+						</span>
+							<span class="kt-menu__link-text">Products</span>
+						</a>
+					</li>
+					@endif
 				@endif
+
 				@if(\Illuminate\Support\Facades\Auth::check() && \Illuminate\Support\Facades\Auth::user()->role_type == 'admin')
 				<li class="kt-menu__item {{ Request::is('orders*') ? 'kt-menu__item--active' : '' }}" aria-haspopup="true">
 					<a  href="{{ url('orders') }}" class="kt-menu__link ">
@@ -86,7 +104,22 @@
 						<span class="kt-menu__link-text">Orders</span>
 					</a>
 				</li>
-					@else
+				@elseif(\Illuminate\Support\Facades\Auth::check() && \Illuminate\Support\Facades\Auth::user()->role_type == 'delivery')
+						<li class="kt-menu__item {{ Request::is('delivery-orders*') ? 'kt-menu__item--active' : '' }}" aria-haspopup="true">
+							<a  href="{{ url('delivery-orders') }}" class="kt-menu__link ">
+						<span class="kt-menu__link-icon">
+							<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
+								<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+									<rect id="bound" x="0" y="0" width="24" height="24" />
+									<path d="M5,3 L6,3 C6.55228475,3 7,3.44771525 7,4 L7,20 C7,20.5522847 6.55228475,21 6,21 L5,21 C4.44771525,21 4,20.5522847 4,20 L4,4 C4,3.44771525 4.44771525,3 5,3 Z M10,3 L11,3 C11.5522847,3 12,3.44771525 12,4 L12,20 C12,20.5522847 11.5522847,21 11,21 L10,21 C9.44771525,21 9,20.5522847 9,20 L9,4 C9,3.44771525 9.44771525,3 10,3 Z" id="Combined-Shape" fill="#000000" />
+									<rect id="Rectangle-Copy-2" fill="#000000" opacity="0.3" transform="translate(17.825568, 11.945519) rotate(-19.000000) translate(-17.825568, -11.945519) " x="16.3255682" y="2.94551858" width="3" height="18" rx="1" />
+								</g>
+							</svg>
+						</span>
+								<span class="kt-menu__link-text">Delivery Orders</span>
+							</a>
+						</li>
+				@else
 					<li class="kt-menu__item {{ Request::is('customerorder*') ? 'kt-menu__item--active' : '' }}" aria-haspopup="true">
 					<a  href="{{ url('customerorder') }}" class="kt-menu__link ">
 						<span class="kt-menu__link-icon">
@@ -98,8 +131,38 @@
 								</g>
 							</svg>
 						</span>
-						<span class="kt-menu__link-text">Orders</span>
+						<span class="kt-menu__link-text">My Orders</span>
 					</a>
+					</li>
+				@endif
+				@if(\Illuminate\Support\Facades\Auth::check() && \Illuminate\Support\Facades\Auth::user()->role_type == 'admin')
+					<li class="kt-menu__item {{ Request::is('all-customers*') ? 'kt-menu__item--active' : '' }}" aria-haspopup="true">
+						<a  href="{{ route('all-customers') }}" class="kt-menu__link ">
+						<span class="kt-menu__link-icon">
+							<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
+								<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+									<rect id="bound" x="0" y="0" width="24" height="24" />
+									<path d="M5,3 L6,3 C6.55228475,3 7,3.44771525 7,4 L7,20 C7,20.5522847 6.55228475,21 6,21 L5,21 C4.44771525,21 4,20.5522847 4,20 L4,4 C4,3.44771525 4.44771525,3 5,3 Z M10,3 L11,3 C11.5522847,3 12,3.44771525 12,4 L12,20 C12,20.5522847 11.5522847,21 11,21 L10,21 C9.44771525,21 9,20.5522847 9,20 L9,4 C9,3.44771525 9.44771525,3 10,3 Z" id="Combined-Shape" fill="#000000" />
+									<rect id="Rectangle-Copy-2" fill="#000000" opacity="0.3" transform="translate(17.825568, 11.945519) rotate(-19.000000) translate(-17.825568, -11.945519) " x="16.3255682" y="2.94551858" width="3" height="18" rx="1" />
+								</g>
+							</svg>
+						</span>
+							<span class="kt-menu__link-text">Customers</span>
+						</a>
+					</li>
+					<li class="kt-menu__item {{ Request::is('delivery-persons*') ? 'kt-menu__item--active' : '' }}" aria-haspopup="true">
+						<a  href="{{ route('delivery-persons') }}" class="kt-menu__link ">
+						<span class="kt-menu__link-icon">
+							<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
+								<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+									<rect id="bound" x="0" y="0" width="24" height="24" />
+									<path d="M5,3 L6,3 C6.55228475,3 7,3.44771525 7,4 L7,20 C7,20.5522847 6.55228475,21 6,21 L5,21 C4.44771525,21 4,20.5522847 4,20 L4,4 C4,3.44771525 4.44771525,3 5,3 Z M10,3 L11,3 C11.5522847,3 12,3.44771525 12,4 L12,20 C12,20.5522847 11.5522847,21 11,21 L10,21 C9.44771525,21 9,20.5522847 9,20 L9,4 C9,3.44771525 9.44771525,3 10,3 Z" id="Combined-Shape" fill="#000000" />
+									<rect id="Rectangle-Copy-2" fill="#000000" opacity="0.3" transform="translate(17.825568, 11.945519) rotate(-19.000000) translate(-17.825568, -11.945519) " x="16.3255682" y="2.94551858" width="3" height="18" rx="1" />
+								</g>
+							</svg>
+						</span>
+							<span class="kt-menu__link-text">Delivery Persons</span>
+						</a>
 					</li>
 				@endif
 				{{--@if(\Illuminate\Support\Facades\Auth::check() && \Illuminate\Support\Facades\Auth::user()->role_type == 'admin')
