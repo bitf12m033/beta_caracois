@@ -16,6 +16,7 @@ Route::get('/clear', function() {
     Artisan::call('view:clear');
     Artisan::call('config:cache');
     Artisan::call('cache:clear');
+    // Artisan::call('migrate');
     return "Cache is cleared";
 });
 Route::get('/', function () {
