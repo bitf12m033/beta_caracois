@@ -26,7 +26,7 @@ var KTDatatablesDataSourceAjaxServer = function() {
 				{data: 'email'},
 				{data: 'phone'},
 				{data: 'address1'},
-				{data: 'Status'},
+				// {data: 'Status'},
 				{data: 'Type'},
 				{data: 'Actions', responsivePriority: -1},
 			],
@@ -82,7 +82,7 @@ var KTDatatablesDataSourceAjaxServer = function() {
                         `;
 					},
 				},
-				{
+				/*{
 					targets: -3,
 					render: function(data, type, full, meta) {
 						var status = {
@@ -99,14 +99,14 @@ var KTDatatablesDataSourceAjaxServer = function() {
 						}
 						return '<span class="kt-badge ' + status[data].class + ' kt-badge--inline kt-badge--pill">' + status[data].title + '</span>';
 					},
-				},
+				},*/
 				{
 					targets: -2,
 					render: function(data, type, full, meta) {
 						var status = {
-							1: {'title': 'Online', 'state': 'danger'},
-							2: {'title': 'Retail', 'state': 'primary'},
-							3: {'title': 'Direct', 'state': 'success'},
+							1: {'title': 'Admin', 'state': 'danger'},
+							2: {'title': 'Customer', 'state': 'primary'},
+							3: {'title': 'Delivery Guy', 'state': 'success'},
 						};
 						if (typeof status[data] === 'undefined') {
 							return data;

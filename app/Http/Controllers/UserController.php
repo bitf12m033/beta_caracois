@@ -8,6 +8,8 @@ use App\User;
 Use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use App\Mail\AccountCreated;
+use Illuminate\Support\Facades\Mail;
 
 class UserController extends Controller
 {
@@ -78,15 +80,29 @@ class UserController extends Controller
         $user->dob = Carbon::parse($request->input('dob'))->format('Y-m-d');
         $user->role_type = $request->input('role_type');
         if($request->input('password'))
-        $user->password = Hash::make($request->input('password'));
+            $user->password = Hash::make($request->input('password'));
         $user->user_image = $path;
         
         // dd($product);
-        $user->save();
-        //sign them in
-        toastr()->error('User is added successfully.!', 'Success!');
-        return redirect()->back();
-     //   return redirect('/users')->with($notification);
+        if($user->save())
+        {
+            toastr()->success('User is added successfully.!', 'Success!');
+            //sign them in
+            $email_data['name'] = $user->name;
+            $email_data['email'] = $user->email;
+            $email_data['password'] = $request->input('password');
+            $email_data['subject'] = 'New Account Created';
+
+            $name = $request->email;
+            Mail::to($name)->send(new AccountCreated($email_data));
+            return redirect('/users');
+        }
+        else
+        {
+            toastr()->error('Oops...Something went Wrong!', 'error!');
+            return redirect()->back();
+        }
+       // return redirect('/users')->with($notification);
 
     }
 
@@ -140,6 +156,7 @@ class UserController extends Controller
 
             $path = $request->file('user_image')->storeAs('uploads/user', $imageName, 'public');
             $request->file('user_image')->move(public_path('uploads/user'), $imageName);
+            $user->user_image = $path;
         }
        
         $user = User::find($id);
@@ -154,17 +171,22 @@ class UserController extends Controller
         $user->dob = Carbon::parse($request->input('dob'))->format('Y-m-d');
         $user->role_type = $request->input('role_type');
         $user->password = Hash::make($request->input('password'));
-        $user->user_image = $path;
         
-        // dd($product);
-        $user->save();
-
+        
+        if($user->save())
+        {
+            toastr()->success('User is updated successfully.', 'Success!');
+        }
+        else
+        {
+            toastr()->error('Oops...Something went Wrong', 'error!');
+        }
         //sign them in
         $notification = [
             'message' => 'User is updated successfully.!',
             'alert-type' => 'success'
         ];
-        return redirect('/users')->with($notification);
+        return redirect('/users');//->with($notification);
     }
 
     /**
@@ -175,9 +197,16 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        $user->delete();
+        if($user->delete())
+        {
+            toastr()->success('User deleted successfully.!', 'Success!');
+        }
+        else
+        {
+            toastr()->error('Oops...Something went Wrong', 'error!');
+        }
 
-        toastr()->error('User is Deleted successfully.!', 'Success!');
+        // toastr()->error('User is Deleted successfully.!', 'Success!');
         return redirect()->back();
 
     }
@@ -212,7 +241,14 @@ class UserController extends Controller
             $temp['phone'] = $user->phone;
             $temp['address1'] = $user->address1;
             $temp['Status'] = rand(1,5);
-            $temp['Type'] = rand(1,3);
+            $role_type = 2;
+            if($user->role_type == 'admin')
+                $role_type =1;
+            else if($user->role_type == 'customer')
+                $role_type = 2;
+            else if ($user->role_type == 'delivery')
+                $role_type = 3;
+            $temp['Type'] = $role_type;
             $temp['Actions'] = null;
             array_push($response['data'], $temp);
            

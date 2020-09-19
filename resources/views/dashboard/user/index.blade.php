@@ -92,7 +92,7 @@
 						<th>Email</th>
 						<th>Phone</th>
 						<th>Address</th>
-						<th>Status</th>
+						
 						<th>Type</th>
 						<th>Actions</th>
 					</tr>

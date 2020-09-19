@@ -31,7 +31,7 @@
 				</div>
 
 				<!--begin::Form-->
-				<form class="kt-form kt-form--label-right" method="POST" action="{!! url('products') !!}">
+				<form class="kt-form kt-form--label-right" method="POST" action="{!! url('products') !!}" enctype="multipart/form-data">
 					@csrf
 					<div class="kt-portlet__body">
 						<div class="form-group row">
@@ -120,7 +120,24 @@
 								<span class="form-text text-muted">Please select user group</span>
 							</div> -->
 						</div>
+
+						<div class="form-group row">
+
+							<div class="col-lg-4">
+								<label for="product_image">Add Picture</label>
+								<div class="kt-input-icon kt-input-icon--right">
+							
+									<div id="image-preview">
+									  <label for="image-upload" id="image-label">Choose File</label>
+									  <input type="file" name="product_image" id="image-upload" />
+									</div>
+								</div>
+								
+							</div>
+							
+						</div>
 					</div>
+
 					<div class="kt-portlet__foot">
 						<div class="kt-form__actions">
 							<div class="row">
