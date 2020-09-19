@@ -27,8 +27,9 @@ class CustomerProductController extends Controller
         $t_day = Carbon::now()->format('Y-m-d');*/
 
         $products = Product::where('deleted_at',null)->where('is_active','1')->get(['products.*',
-            DB::raw('@rownum  := @rownum  + 1 AS rownum')]);
-
+        DB::raw('@rownum  := @rownum  + 1 AS rownum')]);
+        // $products = Product::where('is_active','1')->get();
+        // dd($products);
         return view('customerProducts.index', ['products' => $products]);
     }
     public function cart()

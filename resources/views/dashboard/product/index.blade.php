@@ -52,8 +52,8 @@
 						<th>Expiry Date</th>
 						<th>Quantity</th>
 						<th>Sell Price</th>
-						<th>Status</th>
-						<th>Type</th>
+						<th>Receving Dare</th>
+						<th>Category</th>
 						<th>Actions</th>
 					</tr>
 				</thead>

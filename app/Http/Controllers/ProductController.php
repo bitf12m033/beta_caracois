@@ -63,7 +63,7 @@ class ProductController extends Controller
         ]);
 
         //crete and save the Product
-        // dd($validatedData);
+        // dd($request->all());
         $product = new Product();
         $product->brand_name = $request->input('brand_name');
         $product->product_name = $request->input('product_name');
@@ -74,18 +74,33 @@ class ProductController extends Controller
         $product->sell_price = $request->input('sell_price');
         $product->quantity = $request->input('quantity');
         $product->quantity_left = $request->input('quantity');
+        if ($request->file('product_image')) {
+              $imagePath = $request->file('product_image');
+              $imageName = uniqid().".".$request->file('product_image')->extension();
+
+              $path = $request->file('product_image')->storeAs('uploads/product', $imageName, 'public');
+            $request->file('product_image')->move(public_path('uploads/product'), $imageName);
+        }
+        $product->product_image = $path;
         //Total value finding
         $sell = $product->sell_price;
         $left = $product->quantity_left;
         $product->total= $sell * $left;
         // dd($product);
-        $product->save();
+        if($product->save())
+        {
+            toastr()->success('Product added successfully.!', 'Success!');
+        }
+        else
+        {
+            toastr()->error('Oops...Something went Wrong', 'error!');
+        }
+            return redirect('/products');
         //sign them in
-        $notification = [
+       /* $notification = [
             'message' => 'Product is added successfully.!',
             'alert-type' => 'success'
-        ];
-        return redirect('/products')->with($notification);
+        ];*/
 
         
     }
@@ -132,15 +147,29 @@ class ProductController extends Controller
             'sell_price' => 'required',
             'quantity' => 'required',
         ]);
+        if ($request->file('product_image')) {
+              $imagePath = $request->file('product_image');
+              $imageName = uniqid().".".$request->file('product_image')->extension();
 
-        $product->update($request->all());
+              $path = $request->file('product_image')->storeAs('uploads/product', $imageName, 'public');
+            $request->file('product_image')->move(public_path('uploads/product'), $imageName);
+            $product->product_image = $path;
+        }
 
+        if($product->update($request->all()))
+        {
+            toastr()->success('Product updated successfully.!', 'Success!');
+        }
+        else
+        {
+            toastr()->error('Oops...Something went Wrong', 'error!');
+        }
         //sign them in
         $notification = [
             'message' => 'Product is added successfully.!',
             'alert-type' => 'success'
         ];
-        return redirect('/products')->with($notification);
+        return redirect('/products');//->with($notification);
 
     }
 
@@ -152,9 +181,17 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        $product->delete();
-        return redirect()->route('products.index')
-                        ->with('success','Product deleted successfully');
+       
+        if($product->delete())
+        {
+            toastr()->success('Product deleted successfully.!', 'Success!');
+        }
+        else
+        {
+            toastr()->error('Oops...Something went Wrong', 'error!');
+        }
+        return redirect()->route('products.index');
+                        // ->with('success','Product deleted successfully');
       
     }
     /**
@@ -183,14 +220,15 @@ class ProductController extends Controller
             $temp['id'] = $product->id;
             // $temp['brand_name'] = $product->brand_name;
             $temp['product_name'] = $product->product_name;
-            // $temp['receive_date'] = $product->receive_date;
-            // $temp['category'] = $product->category;
+            $temp['product_image'] = $product->product_image;
+            $temp['receive_date'] = $product->receive_date;
+            $temp['category'] = $product->category;
             $temp['expired_date'] = $product->expired_date;
             // $temp['orginal_price'] = $product->orginal_price;
             $temp['quantity'] = $product->quantity;
             $temp['sell_price'] = $product->sell_price;
-            $temp['Status'] = rand(1,5);
-            $temp['Type'] = rand(1,3);
+            // $temp['Status'] = rand(1,5);
+            $temp['Type'] = $product->category;
             $temp['Actions'] = null;
             array_push($response['data'], $temp);
            
