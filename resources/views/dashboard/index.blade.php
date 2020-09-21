@@ -18,7 +18,7 @@
 							Activity
 						</h3>
 					</div>
-					<div class="kt-portlet__head-toolbar">
+					<!-- <div class="kt-portlet__head-toolbar">
 						<a href="#" class="btn btn-label-light btn-sm btn-bold dropdown-toggle" data-toggle="dropdown">
 							Export
 						</a>
@@ -62,7 +62,7 @@
 								</li>
 							</ul>
 						</div>
-					</div>
+					</div> -->
 				</div>
 				<div class="kt-portlet__body kt-portlet__body--fit">
 					<div class="kt-widget17">
@@ -83,10 +83,10 @@
 											</g>
 										</svg> </span>
 									<span class="kt-widget17__subtitle">
-										Delivered
+										Total Orders
 									</span>
 									<span class="kt-widget17__desc">
-										15 New Paskages
+										{{$total_orders}} Orders
 									</span>
 								</div>
 								<div class="kt-widget17__item">
@@ -99,10 +99,10 @@
 											</g>
 										</svg> </span>
 									<span class="kt-widget17__subtitle">
-										Ordered
+										Pending
 									</span>
 									<span class="kt-widget17__desc">
-										72 New Items
+										{{$pending_orders}} Orders
 									</span>
 								</div>
 							</div>
@@ -117,10 +117,10 @@
 											</g>
 										</svg> </span>
 									<span class="kt-widget17__subtitle">
-										Reported
+										Completed
 									</span>
 									<span class="kt-widget17__desc">
-										72 Support Cases
+										{{$complete_orders}} Orders
 									</span>
 								</div>
 								<div class="kt-widget17__item">
@@ -157,7 +157,7 @@
 							Inbound Bandwidth
 						</h3>
 					</div>
-					<div class="kt-portlet__head-toolbar">
+					<!-- <div class="kt-portlet__head-toolbar">
 						<a href="#" class="btn btn-label-success btn-sm btn-bold dropdown-toggle" data-toggle="dropdown">
 							Export
 						</a>
@@ -195,7 +195,7 @@
 								</li>
 							</ul>
 						</div>
-					</div>
+					</div> -->
 				</div>
 				<div class="kt-portlet__body kt-portlet__body--fluid">
 					<div class="kt-widget20">
@@ -215,52 +215,7 @@
 
 			<!--begin:: Widgets/Outbound Bandwidth-->
 			<div class="kt-portlet kt-portlet--fit kt-portlet--head-noborder kt-portlet--height-fluid-half">
-				<div class="kt-portlet__head kt-portlet__space-x">
-					<div class="kt-portlet__head-label">
-						<h3 class="kt-portlet__head-title">
-							Outbound Bandwidth
-						</h3>
-					</div>
-					<div class="kt-portlet__head-toolbar">
-						<a href="#" class="btn btn-label-warning btn-sm  btn-bold dropdown-toggle" data-toggle="dropdown">
-							Download
-						</a>
-						<div class="dropdown-menu dropdown-menu-fit dropdown-menu-right">
-							<ul class="kt-nav">
-								<li class="kt-nav__item">
-									<a href="#" class="kt-nav__link">
-										<i class="kt-nav__link-icon flaticon2-line-chart"></i>
-										<span class="kt-nav__link-text">Reports</span>
-									</a>
-								</li>
-								<li class="kt-nav__item">
-									<a href="#" class="kt-nav__link">
-										<i class="kt-nav__link-icon flaticon2-send"></i>
-										<span class="kt-nav__link-text">Messages</span>
-									</a>
-								</li>
-								<li class="kt-nav__item">
-									<a href="#" class="kt-nav__link">
-										<i class="kt-nav__link-icon flaticon2-pie-chart-1"></i>
-										<span class="kt-nav__link-text">Charts</span>
-									</a>
-								</li>
-								<li class="kt-nav__item">
-									<a href="#" class="kt-nav__link">
-										<i class="kt-nav__link-icon flaticon2-avatar"></i>
-										<span class="kt-nav__link-text">Members</span>
-									</a>
-								</li>
-								<li class="kt-nav__item">
-									<a href="#" class="kt-nav__link">
-										<i class="kt-nav__link-icon flaticon2-settings"></i>
-										<span class="kt-nav__link-text">Settings</span>
-									</a>
-								</li>
-							</ul>
-						</div>
-					</div>
-				</div>
+				<!-- 		 -->
 				<div class="kt-portlet__body kt-portlet__body--fluid">
 					<div class="kt-widget20">
 						<div class="kt-widget20__content kt-portlet__space-x">
@@ -276,7 +231,29 @@
 
 			<!--end:: Widgets/Outbound Bandwidth-->
 		</div>
+
 		<div class="col-xl-4">
+
+			<!--begin:: Widgets/Daily Sales-->
+			<div class="kt-portlet kt-portlet--height-fluid">
+				<div class="kt-widget14">
+					<div class="kt-widget14__header kt-margin-b-30">
+						<h3 class="kt-widget14__title">
+							Daily Sales
+						</h3>
+						<span class="kt-widget14__desc">
+							Check out each collumn for more details
+						</span>
+					</div>
+					<div class="kt-widget14__chart" style="height:120px;">
+						<canvas id="kt_chart_daily_sales"></canvas>
+					</div>
+				</div>
+			</div>
+
+			<!--end:: Widgets/Daily Sales-->
+		</div>
+		<div class="col-xl-4" style="display: none;">
 
 			<!--Begin::Portlet-->
 			<div class="kt-portlet kt-portlet--height-fluid">
@@ -430,7 +407,7 @@
 	<!--End::Section-->
 
 	<!--Begin::Section-->
-	<div class="row">
+	<div class="row" style="display: none;">
 		<div class="col-xl-8">
 			<div class="kt-portlet kt-portlet--height-fluid kt-portlet--mobile ">
 				<div class="kt-portlet__head kt-portlet__head--lg kt-portlet__head--noborder kt-portlet__head--break-sm">
@@ -545,7 +522,7 @@
 	<!--End::Section-->
 
 	<!--Begin::Section-->
-	<div class="row">
+	<div class="row" style="display: none;">
 		<div class="col-xl-8">
 
 			<!--begin:: Widgets/Best Sellers-->
@@ -1061,7 +1038,7 @@
 	<!--End::Section-->
 
 	<!--Begin::Section-->
-	<div class="row">
+	<div class="row" style="display: none;">
 		<div class="col-xl-4">
 
 			<!--begin:: Widgets/Daily Sales-->
@@ -1083,7 +1060,7 @@
 
 			<!--end:: Widgets/Daily Sales-->
 		</div>
-		<div class="col-xl-4">
+		<div class="col-xl-4" style="display: none;">
 
 			<!--begin:: Widgets/Profit Share-->
 			<div class="kt-portlet kt-portlet--height-fluid">
@@ -1121,7 +1098,7 @@
 
 			<!--end:: Widgets/Profit Share-->
 		</div>
-		<div class="col-xl-4">
+		<div class="col-xl-4" style="display: none;">
 
 			<!--begin:: Widgets/Revenue Change-->
 			<div class="kt-portlet kt-portlet--height-fluid">
@@ -1163,7 +1140,7 @@
 	<!--End::Section-->
 
 	<!--Begin::Section-->
-	<div class="row">
+	<div class="row" style="display: none;">
 		<div class="col-xl-4">
 
 			<!--begin:: Widgets/Tasks -->
