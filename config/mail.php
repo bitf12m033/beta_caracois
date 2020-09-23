@@ -36,11 +36,11 @@ return [
     'mailers' => [
         'smtp' => [
             'transport' => 'smtp',
-            'host' => env('MAIL_HOST', 'smtp.mailtrap.io'),
-            'port' => env('MAIL_PORT', 587),
+            'host' => env('MAIL_HOST', 'mail-pt.securemail.pro'),
+            'port' => env('MAIL_PORT', 25),
             'encryption' => env('MAIL_ENCRYPTION', 'tls'),
-            'username' => env('MAIL_USERNAME','7b3d87f42d19fb'),
-            'password' => env('MAIL_PASSWORD','a033232726dc51'),
+            'username' => env('MAIL_USERNAME','geral@betacaracois.pt'),
+            'password' => env('MAIL_PASSWORD','geral@123!!!'),
             'timeout' => null,
             'auth_mode' => null,
         ],
