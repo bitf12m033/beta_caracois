@@ -223,15 +223,15 @@
 
 
     <script type="colorScheme" class="swatch active">
-{
-    "name":"Default",
-    "bgBody":"ffffff",
-    "link":"27A1E5",
-    "color":"AAAAAA",
-    "bgItem":"ffffff",
-    "title":"444444"
-}
-</script>
+        {
+            "name":"Default",
+            "bgBody":"ffffff",
+            "link":"27A1E5",
+            "color":"AAAAAA",
+            "bgItem":"ffffff",
+            "title":"444444"
+        }
+    </script>
 
 
 </head>
@@ -244,7 +244,8 @@
                 <!-- =============== START HEADER =============== -->
                 <tbody>
                 <tr>
-                    <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <td>
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
                             <tbody>
                             <tr>
                                 <td valign="top" width="20">&nbsp;</td>
@@ -314,7 +315,7 @@
                                                                                             <div class='contentEditable' style=''>
                                                                                                 <h2 style="font-size: 20px;">Hello {{$email_data['name']}},
                                                                                                     <br>
-                                                                                                    Your Order has been Placed</h2>
+                                                                                                    {{$email_data['notification_text']}}</h2>
                                                                                                 <br>
                                                                                                 <p>
                                                                                                     Name:  {{$email_data['name']}}
@@ -330,11 +331,43 @@
                                                                                                         Contact:  {{$email_data['contact_no']}}
                                                                                                     </p>
                                                                                                 @endif
+                                                                                                @if(isset($email_data['items']))
+                                                                                                    <p>
+                                                                                                        Items List:
+                                                                                                        <table border="1"cellspacing="0" cellpadding="1" color="grey" >
+                                                                                                            <thead>
+                                                                                                                <th>ID</th>
+                                                                                                                <th>Name</th>
+                                                                                                                <th>Sell Price</th>
+                                                                                                                <th>Quantity</th>
+                                                                                                                <th>SP * Q</th>
+                                                                                                            </thead>
+                                                                                                            <tbody>
+                                                                                                                @foreach($email_data['items'] as $item)
+                                                                                                                
+                                                                                                                    <tr>
+                                                                                                                        <td>{{$item['sr']}}</td>
+                                                                                                                        <td>{{$item['name']}}</td>
+                                                                                                                        <td>{{$item['unit_price']}}</td>
+                                                                                                                        <td>{{$item['quantity']}}</td>
+                                                                                                                        <td>{{$item['cal_price']}}</td>
+                                                                                                                        
+                                                                                                                    </tr>
+
+                                                                                                                @endforeach
+                                                                                                            </tbody>
+                                                                                                        </table>
+                                                                                                    </p>
+                                                                                                @endif
                                                                                                 @if(isset($email_data['total']))
                                                                                                     <p>
                                                                                                         Total Amount:  {{$email_data['total']}}$
                                                                                                     </p>
                                                                                                 @endif
+
+                                                                                                 @if(isset($email_data['signature']))
+                                                                                                   <img src="{{\Illuminate\Support\Facades\URL::asset('/uploads/signatures/'. $email_data['signature'])}}">
+                                                                                                @endif    
                                                                                                 <br>
                                                                                                 <br>
 

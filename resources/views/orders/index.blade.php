@@ -133,7 +133,7 @@
                                 <a href="#" onclick="$(this).closest('form').submit()"><i class="la la-trash"></i></a>
                                 {!! Form::close() !!}
                                 @endif
-                                <a href="javascript:void(0);" data-toggle="tooltip" data-original-title="Click to Change Status"   class="btn btn-primary" data-cost="{{ $order->id }}"  onClick="change_order_status({{$order->id }})"> Update</a>
+                                <a href="javascript:void(0);" data-toggle="tooltip" data-original-title="Click to Change Status"   class="btn btn-primary" data-cost="{{ $order->id }}"  onClick="change_order_status({{$order->id }})"> Sign Here</a>
                             </td>
                         </tr>
                         @endforeach
@@ -241,7 +241,7 @@
                         </div>
                     </div>
 
-                        <input type="checkbox" id="payment_received" name="payment_received" value="1" checked>
+                        <input type="checkbox" required="required" id="payment_received" name="payment_received" value="1" checked>
                         <label for="payment_received"> Payment Received</label><br>
                   {{--  <button class="btn btn-success">Save</button> <br>--}}
                     <input type="hidden" id="order_id" name="order_id">
@@ -373,7 +373,6 @@
                 $("#success_alert").css('display','none');
                 $('.tooltip').not(this).hide();
                 $("#change_status").modal();
-                debugger;
                 $("#order_id").val(order_id);
             }
         }

@@ -52,19 +52,23 @@
                             <div class="form-group row">
                                 <div class="col-lg-4">
                                     <label for="product_name">Customer Name:</label>
-                                    <input type="text" id="product_name" value={{ $order->customer_name }} name="customer_name" class="form-control" placeholder="Enter Customer name">
+                                    <input type="text" id="product_name" readonly="readonly" value={{ $order->customer_name }} name="customer_name" class="form-control" placeholder="Enter Customer name">
+                                </div>
+                                <div class="col-lg-4">
+                                    <label for="product_name">Customer Email:</label>
+                                    <input type="text" id="product_name" readonly="readonly" value="{{ $order->customer_email }}" name="customer_email" class="form-control" placeholder="Enter Customer Email">
                                 </div>
 
                                 <div class="col-lg-4">
                                     <label for="validation-contactno">Contact no.</label>
-                                    <input id="validation-contactno" value="{{ $order->customer_phone }}" class="form-control"  placeholder="e.g 447712345678"   name="contact"  type="text">
+                                    <input id="validation-contactno" readonly="readonly" value="{{ $order->customer_phone }}" class="form-control"  placeholder="e.g 447712345678"   name="contact"  type="text">
                                     <!-- <span class="form-text text-muted">Please enter your email</span> -->
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <div class="col-lg-8">
                                     <label for="brand_name">Customer Address:</label>
-                                    <input type="text" id="brand_name" value="{{ $order->customer_address }}" name="customer_add" class="form-control" placeholder="Enter Customer Address">
+                                    <input type="text" id="brand_name" readonly="readonly" value="{{ $order->customer_address }}" name="customer_add" class="form-control" placeholder="Enter Customer Address">
                                     <!-- <span class="form-text text-muted">Please enter your email</span> -->
                                 </div>
                             </div>

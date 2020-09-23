@@ -30,6 +30,8 @@ class OrderPlaced extends Mailable
     {
         $email_data = $this->email_data;
         return $this->view('mail.OrderPlaced')
+            ->subject($email_data['subject'])
+            
             ->with([
                 'email_data' => $email_data
             ]);
