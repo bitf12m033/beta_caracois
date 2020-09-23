@@ -100,12 +100,14 @@ class OrderController extends Controller
         $order->customer_phone = '+'.$request->contact_num;
         $order->customer_email = $request->email;
         $total =0;
-        $productes = [];
+        $items = [];
+        $sr=0;
         foreach (session('cart') as $id => $details)
         {
             $product_price = Product::where('id',$details['product_id'])->first();
             $total += $product_price->sell_price * $details['quantity'];
-          //  array_push($productes,$details['product_id']);
+            $item = array('id'=>$details['product_id'],'sr'=>++$sr,'quantity'=>$details['quantity'],'name'=>$product_price->product_name,'unit_price'=>$product_price->sell_price,'cal_price'=>$product_price->sell_price*$details['quantity']);
+           array_push($items,$item);
          }
         $order->total_amount = $total;
         $order->products = 0;
@@ -115,7 +117,10 @@ class OrderController extends Controller
         $email_data2['order_no'] = $order->id;
         $email_data2['contact_no'] = $order->customer_phone;
         $email_data2['total'] = $order->total_amount;
-        $email_data2['subject'] = 'Account Created';
+        $email_data2['subject'] = 'Order Placed';
+        $email_data2['items'] = $items;
+        $email_data2['notification_text'] = 'Your Order has been Placed';
+
 
         $name = $order->customer_email;
         Mail::to($name)->send(new OrderPlaced($email_data2));
@@ -139,16 +144,6 @@ class OrderController extends Controller
 
         }
 
-
-
-       /* foreach($request->product as $am)
-        {
-            $product_price = Product::where('id',$am)->first();
-            $amount = $amount + $product_price->sell_price;
-        }
-        $order->total_amount = $amount;
-        $order->products = serialize($request->product);
-        $order->save();*/
         session()->forget('cart');
         toastr()->success('Order Place Successfully', 'Success!');
         return redirect()->route('orders.index');
@@ -183,7 +178,6 @@ class OrderController extends Controller
         session()->forget('cart');
 
         $products = OrderProducts::where('order_id',$id)->get();
-      //  dd($products);
         foreach ($products as $pr)
         {
             $product = Product::find($pr->product_id);
@@ -255,18 +249,35 @@ class OrderController extends Controller
         $order = Order::where('id',$request->id)->first();
         $order->customer_name = $request->customer_name;
         $order->customer_address = $request->customer_add;
+        $order->customer_email = $request->customer_email;
         $order->customer_phone = $request->contact;
         $total =0;
-        $productes = [];
+        $items = [];
+        $sr=0;
         foreach (session('cart') as $id => $details)
         {
             $product_price = Product::where('id',$details['product_id'])->first();
             $total += $product_price->sell_price * $details['quantity'];
-            //  array_push($productes,$details['product_id']);
+            $item = array('id'=>$details['product_id'],'sr'=>++$sr,'quantity'=>$details['quantity'],'name'=>$product_price->product_name,'unit_price'=>$product_price->sell_price,'cal_price'=>$product_price->sell_price*$details['quantity']);
+           array_push($items,$item);
         }
         $order->total_amount = $total;
         $order->products = 0;
         $order->save();
+
+        $email_data2['name'] = $order->customer_name;
+        $email_data2['order_no'] = $order->id;
+        $email_data2['contact_no'] = $order->customer_phone;
+        $email_data2['total'] = $order->total_amount;
+        $email_data2['subject'] = 'Order Updated';
+        $email_data2['items'] = $items;
+        $email_data2['notification_text'] = 'Your Order has been Updated';
+
+
+        $name = $order->customer_email;
+        Mail::to($name)->send(new OrderPlaced($email_data2));
+
+
         $prod = OrderProducts::where('order_id',$request->id)->get();
         foreach ($prod as $pf)
         {
@@ -310,7 +321,9 @@ class OrderController extends Controller
     }
     public function change_status(Request $request)
     {
-        //dd($request->all());
+
+
+         
         if( isset($request->dataURL) and strlen($request->dataURL) > 700 )
         {
             $data               = $request->dataURL;
@@ -320,13 +333,43 @@ class OrderController extends Controller
             $logoName           = rand(000000000, 999999999) . '.png';
             file_put_contents(public_path() . '/uploads/signatures/' . $logoName, $data);
             $order = Order::where('id',$request->order_id)->first();
-            if(isset($request->payment_received) && $request->payment_received == 1 )
-            $order->payment_status = $request->payment_received;
-            $order->order_status = 1;
-            $order->signature = $logoName;
-            $order->save();
 
-            return redirect()->back()->with('success', 'Order Updated successfully!');
+            if(isset($request->payment_received) && $request->payment_received == 1 ){
+                $order->payment_status = $request->payment_received;
+                $order->order_status = 1;
+                $order->signature = $logoName;
+                        $order->save();
+                $order_items = Order::select('orders.*','products.product_name','products.sell_price','order_products.quantity')->join('order_products','order_products.order_id','=','orders.id')->join('products','products.id','=','order_products.product_id')->where('orders.id',$request->order_id)->get();
+
+                $total =0;
+                $items = [];
+                $sr=0;
+
+                foreach ($order_items as $item) {
+                    $total += $item->sell_price * $item->quantity;
+                    $_item = array('sr'=>++$sr,'quantity'=>$item->quantity,'name'=>$item->product_name,'unit_price'=>$item->sell_price,'cal_price'=>$item->sell_price*$item->quantity);
+                    array_push($items,$_item);
+                    if($sr == 1){
+
+                        $email_data2['name'] = $item->customer_name;
+                        $email_data2['order_no'] = $item->id;
+                        $email_data2['contact_no'] = $item->customer_phone;
+                        $email_data2['email'] = $item->customer_email;
+                    }
+                }
+                $email_data2['total'] = $total;
+                $email_data2['items'] = $items;
+                $email_data2['signature'] = $logoName;
+                $email_data2['subject'] = 'Order Completed';
+                $email_data2['notification_text'] = 'Your Order has been delievered successfully';
+
+            
+
+                Mail::to($email_data2['email'])->send(new OrderPlaced($email_data2));                
+
+                return redirect()->back()->with('success', 'Order Completed successfully!');
+            }
+
         }
     }
 }
