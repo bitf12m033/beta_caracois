@@ -36,11 +36,11 @@ return [
     'mailers' => [
         'smtp' => [
             'transport' => 'smtp',
-            'host' => env('MAIL_HOST', 'mail-pt.securemail.pro'),
+            'host' => env('MAIL_HOST', 'smtp.gmail.com'),
             'port' => env('MAIL_PORT', 25),
             'encryption' => env('MAIL_ENCRYPTION', 'tls'),
-            'username' => env('MAIL_USERNAME','geral@betacaracois.pt'),
-            'password' => env('MAIL_PASSWORD','geral@123!!!'),
+            'username' => env('MAIL_USERNAME','jennywalker181@gmail.com'),
+            'password' => env('MAIL_PASSWORD','humtum77'),
             'timeout' => null,
             'auth_mode' => null,
         ],
