@@ -99,6 +99,8 @@ class OrderController extends Controller
         $order->customer_address = $request->customer_add;
         $order->customer_phone = '+'.$request->contact_num;
         $order->customer_email = $request->email;
+        $order->created_at = Carbon::now();
+        $email_data2['created_at'] = Carbon::parse($order->created_at)->format('Y/m/d H:i');
         $total =0;
         $items = [];
         $sr=0;
@@ -119,6 +121,7 @@ class OrderController extends Controller
         $email_data2['total'] = $order->total_amount;
         $email_data2['subject'] = 'Order Placed';
         $email_data2['items'] = $items;
+        $email_data2['order_status'] = 'Pending';
         $email_data2['notification_text'] = 'Your Order has been Placed';
 
 
@@ -254,6 +257,7 @@ class OrderController extends Controller
         $total =0;
         $items = [];
         $sr=0;
+         $email_data2['order_status'] = 'Pending';
         foreach (session('cart') as $id => $details)
         {
             $product_price = Product::where('id',$details['product_id'])->first();
@@ -263,6 +267,10 @@ class OrderController extends Controller
         }
         $order->total_amount = $total;
         $order->products = 0;
+        $order->updated_at = Carbon::now();
+        $email_data2['created_at'] = Carbon::parse($order->created_at)->format('Y/m/d H:i');
+        if($order->order_status == 1 && $order->payment_status ==1)
+            $email_data2['order_status'] = 'Completed';
         $order->save();
 
         $email_data2['name'] = $order->customer_name;
@@ -338,7 +346,12 @@ class OrderController extends Controller
                 $order->payment_status = $request->payment_received;
                 $order->order_status = 1;
                 $order->signature = $logoName;
-                        $order->save();
+                $order->updated_at = Carbon::now();
+                $email_data2['created_at'] = Carbon::parse($order->created_at)->format('Y/m/d H:i');
+                $email_data2['completed_at'] = Carbon::parse($order->updated_at)->format('Y/m/d H:i');
+
+                $email_data2['order_status'] = 'Completed';
+                 $order->save();
                 $order_items = Order::select('orders.*','products.product_name','products.sell_price','order_products.quantity')->join('order_products','order_products.order_id','=','orders.id')->join('products','products.id','=','order_products.product_id')->where('orders.id',$request->order_id)->get();
 
                 $total =0;

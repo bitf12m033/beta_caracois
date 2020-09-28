@@ -326,6 +326,33 @@
                                                                                                         Order number:  {{$email_data['order_no']}}
                                                                                                     </p>
                                                                                                 @endif
+
+                                                                                                @if(isset($email_data['created_at']))
+                                                                                                    <p>
+                                                                                                        Created At:  {{$email_data['created_at']}}
+                                                                                                    </p>
+                                                                                                @endif
+
+                                                                                                @if(isset($email_data['order_status']))
+                                                                                                    <p>
+                                                                                                        Order Status:  
+                                                                                                        @if($email_data['order_status'] == 'Pending')
+                                                                                                            <span style="color: red ; font-style: bold">
+                                                                                                         @else
+                                                                                                            <span style="color: green;font-style: bold">
+                                                                                                                
+                                                                                                        @endif        
+                                                                                                            {{$email_data['order_status']}}
+                                                                                                            
+                                                                                                        </span>
+                                                                                                    </p>
+                                                                                                @endif
+
+                                                                                                @if(isset($email_data['completed_at']))
+                                                                                                    <p>
+                                                                                                        Completed At:  {{$email_data['completed_at']}}
+                                                                                                    </p>
+                                                                                                @endif
                                                                                                 @if(isset($email_data['contact_no']))
                                                                                                     <p>
                                                                                                         Contact:  {{$email_data['contact_no']}}

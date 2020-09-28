@@ -20,7 +20,7 @@ License: You must have a valid license purchased only from themeforest(the above
 		<title>{{ config('app.name', 'BetaCaracois') }}</title>
 		<meta name="description" content="Updates and statistics">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+		<meta name="csrf-token" content="{{ csrf_token() }}">
 		<!--begin::Fonts -->
 		<script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.16/webfont.js"></script>
 		<script>
@@ -96,11 +96,6 @@ License: You must have a valid license purchased only from themeforest(the above
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 		<link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}">
-
-
-
-
-
 
 		<style>
 			.kbw-signature { width: 100%; height: 200px;}

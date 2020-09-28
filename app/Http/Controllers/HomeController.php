@@ -18,7 +18,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        // $this->middleware('auth');
     }
 
     /**
@@ -33,5 +33,12 @@ class HomeController extends Controller
         $complete_orders = Order::where('deleted_at',null)->where('order_status',1)->where('payment_status',1)->get()->count();
         // dd($complete_orders);
         return view('dashboard.index',compact('total_orders','pending_orders','complete_orders'));
+    }
+
+    public function showProducts()
+    {
+        $products = Product::all();
+
+        return view('front.products',compact('products'));
     }
 }

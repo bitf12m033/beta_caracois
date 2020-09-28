@@ -16,15 +16,28 @@ Route::get('/clear', function() {
     Artisan::call('view:clear');
     Artisan::call('config:cache');
     Artisan::call('cache:clear');
-    Artisan::call('migrate');
+    // Artisan::call('migrate');
     return "Cache is cleared";
 });
 Route::get('/', function () {
+    return view('front.index');
+    // return view('auth.login');
+});
+Route::get('/contact-us', function () {
+    return view('front.contact');
+});
+
+Route::get('/about-us', function () {
+    return view('front.about');
+});
+Route::get('/bo', function () {
     return view('auth.login');
 });
 
+
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/products-list', 'HomeController@showProducts')->name('products-list');
 
 Route::group(['middleware' => 'App\Http\Middleware\AdminMiddleware'], function()
 {

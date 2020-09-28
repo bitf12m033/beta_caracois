@@ -29,3 +29,4 @@ composer.phar
 /app/config/packages
 /public/packages
 *.zip
+/resources/views/front/wines/*
