@@ -28,11 +28,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $total_orders = Order::where('deleted_at',null)->get()->count();
-        $pending_orders = Order::where('deleted_at',null)->where('order_status',0)->where('payment_status',0)->get()->count();
-        $complete_orders = Order::where('deleted_at',null)->where('order_status',1)->where('payment_status',1)->get()->count();
-        // dd($complete_orders);
-        return view('dashboard.index',compact('total_orders','pending_orders','complete_orders'));
+        
+        return view('front.index');
     }
 
     public function showProducts()

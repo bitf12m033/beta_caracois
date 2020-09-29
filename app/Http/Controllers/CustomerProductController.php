@@ -168,4 +168,78 @@ class CustomerProductController extends Controller
     {
         //
     }
+
+    public function addToCartAjax(Request $request) {
+        $id = $request->input('productid');
+        $session = $request->session();
+        $cartData = ($session->get('cart')) ? $session->get('cart') : array();
+        if (array_key_exists($id, $cartData)) { 
+            $cartData[$id]['qty']++;
+        } else 
+        {
+            $cartData[$id] = array(
+                'qty' => 1
+            );
+        }
+        $request->session()->put('cart', $cartData);
+
+        //return redirect()->back()->with('message', 'Product Added Successfully!');
+        return response()->json(['msg' => $id], 200);
+    }
+
+    public function getCartDetails(Request $request)
+    {
+        
+        if(!session('cart'))
+        {
+            toastr()->error('Cart is Empty', 'Error!');
+            return redirect()->back();
+        }
+       
+        $total =0;
+        $items = [];
+        foreach (session('cart') as $key => $details)
+        {
+            // dd($qty);
+            $item = Product::where('id',$key)->first();
+            $total += $item->sell_price * $details['qty'];
+            array_push($items,array('id'=>$item->id,'product_name'=>$item->product_name,'product_image'=>$item->product_image,'qty'=>$details['qty'],'sell_price'=>$item->sell_price,'subtotal'=>$item->sell_price*$details['qty']));
+        }
+
+        return view('front.cart',compact('items'));
+    }
+
+    public function updateCart(Request $request)
+    {  
+        $qtys = $request->input('quantity');
+       $productids = $request->input('productid');
+        
+       $total = 0;
+        if(session('cart'))
+        {   $items = [];
+            $cart = session()->get('cart');
+            foreach (session('cart') as $key => $details) {
+                
+                if(($k = array_search($key,$productids)) !== FALSE)
+                {
+                    if($qtys[$k] > 0){
+
+                        $cart[$key]["qty"] = $qtys[$k];
+                        $item = Product::where('id',$key)->first();
+                        $total += $item->sell_price * $qtys[$k];
+                        array_push($items,array('id'=>$item->id,'product_name'=>$item->product_name,'product_image'=>$item->product_image,'qty'=>$qtys[$k],'sell_price'=>$item->sell_price,'subtotal'=>$item->sell_price*$qtys[$k]));
+                    }
+                    else
+                    {
+
+                        unset($cart[$key]);
+                    }
+                }
+            }   
+            session()->put('cart', $cart);
+            toastr()->success('Cart updated Successfully', 'Success!');
+            return redirect()->back();          
+        }
+  
+    }
 }

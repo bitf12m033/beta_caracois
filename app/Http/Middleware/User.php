@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Auth;
-class AdminMiddleware
+class User
 {
     /**
      * Handle an incoming request.
@@ -20,14 +20,14 @@ class AdminMiddleware
             return redirect()->route('home-login');
         }
 
-        if(Auth::user()->role_type == 'admin')
+        if(Auth::user()->role_type == 'customer')
         {
             return $next($request);
         }
 
-        if(Auth::user()->role_type == 'customer')
+        if(Auth::user()->role_type == 'admin')
         {
-            return redirect()->route('home');
+            return redirect()->route('admin');
         }
 
         if(Auth::user()->role_type == 'delivery')
@@ -35,9 +35,5 @@ class AdminMiddleware
             return redirect()->route('admin');
         }
         
-        /*if ($request->user() && $request->user()->role_type != 'admin')
-        {
-            return response()->view('pages.unauthorized',['role' => 'ADMIN']);
-        }*/
     }
 }

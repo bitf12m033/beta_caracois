@@ -317,8 +317,7 @@ class ProductController extends Controller
     }
     public function update_cart(Request $request)
     {
-        //dd(session('cart') );
-       // dd($request->all());
+
         if($request->id and $request->quantity)
         {
             $cart = session()->get('cart');

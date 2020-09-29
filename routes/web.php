@@ -34,10 +34,19 @@ Route::get('/bo', function () {
     return view('auth.login');
 });
 
+Route::get('/home-login', function () {
+    return view('front.auth.login');
+});
+
 
 Auth::routes();
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index')->name('home')->middleware('user');
+
+Route::get('/admin', 'AdminController@index')->name('admin')->middleware('admin');
 Route::get('/products-list', 'HomeController@showProducts')->name('products-list');
+Route::post('/atc', 'CustomerProductController@addToCartAjax')->name('addtocart');
+Route::post('/update-atc', 'CustomerProductController@updateCart')->name('updatecart');
+Route::get('/cart-detail', 'CustomerProductController@getCartDetails')->name('cartdetail');
 
 Route::group(['middleware' => 'App\Http\Middleware\AdminMiddleware'], function()
 {
@@ -45,7 +54,6 @@ Route::group(['middleware' => 'App\Http\Middleware\AdminMiddleware'], function()
     Route::get('/ajax/users', 'UserController@fetchAllUsers')->name('ajax-users');
     Route::get('delivery-persons', 'UserController@delivery_boys')->name('delivery-persons');
     Route::get('all-customers', 'UserController@all_customers')->name('all-customers');
-
     /*Route::resource('products', 'ProductController');
     Route::resource('users', 'UserController');*/
     Route::resources([

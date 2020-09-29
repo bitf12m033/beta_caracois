@@ -100,7 +100,7 @@ var KTLoginGeneral = function() {
 	                    btn.removeClass('kt-spinner kt-spinner--right kt-spinner--sm kt-spinner--light').attr('disabled', false);
 	                    showErrorMsg(form, 'danger', 'Incorrect username or password. Please try again.');
                     }, 2000);
-                    window.location = "/home";
+                    window.location = "/admin";
                 }
             });
         });

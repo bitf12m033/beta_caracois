@@ -30,3 +30,4 @@ composer.phar
 /public/packages
 *.zip
 /resources/views/front/wines/*
+/resources/views/front/wines

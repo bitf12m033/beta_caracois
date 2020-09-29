@@ -25,18 +25,31 @@
 			                <li><a href="/products-list" class="nav-link text-left">Shop</a></li>
 			                <li><a href="/contact-us" class="nav-link text-left">Contact</a></li>
 		                	<li class="active">
-		                		<a href="/" class="nav-link text-left">Cart
-		                			<span class="badge badge-pill badge-danger">4</span>
+		                		<a href="/cart-detail" class="nav-link text-left cart-link" id="cart-count">Cart
+		                			<span class="badge badge-pill badge-danger">0</span>
 		                		</a>
 		                	</li>
 			            </ul>
-		              	
-			                
-			           
 			        </nav>
-
-			    
-  				</div> 
+  				</div>
+  				<div class="mx-auto">
+  					@guest
+  					<a href="/home-login" class="btn btn-primary btn-sm">Login</a>
+  					<a href="/home-register" class="btn btn-default btn-sm">Register</a>
+  					@endguest
+  					@auth
+				        Welcome {{Auth::user()->name}},
+				        <a href="{{ route('logout') }}"
+                   			onclick="event.preventDefault();
+                                 document.getElementById('logout-form').submit();" target="_blank" class="btn btn-label-brand btn-sm btn-bold btn-danger">Logout</a>
+                        <form id="logout-form" 
+                        	action="{{ route('logout') }}" 
+                        	method="POST" style="display: none;">
+                            @csrf
+                        </form>
+				    @endauth
+  					
+  				</div>
 			</div>
 		</div>
 	</div>
