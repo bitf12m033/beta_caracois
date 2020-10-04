@@ -29,3 +29,6 @@ function addToCart(pid) {
 function updateCart() {
 	$("#update-cart").submit();
 }
+function placeOrder() {
+	$("#checkout-form").submit();
+}

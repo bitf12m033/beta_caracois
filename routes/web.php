@@ -47,6 +47,8 @@ Route::get('/products-list', 'HomeController@showProducts')->name('products-list
 Route::post('/atc', 'CustomerProductController@addToCartAjax')->name('addtocart');
 Route::post('/update-atc', 'CustomerProductController@updateCart')->name('updatecart');
 Route::get('/cart-detail', 'CustomerProductController@getCartDetails')->name('cartdetail');
+Route::get('/checkout', 'CustomerProductController@checkout')->name('checkout');
+Route::post('/place-order', 'CustomerProductController@placeOrder')->name('placeorder');
 
 Route::group(['middleware' => 'App\Http\Middleware\AdminMiddleware'], function()
 {

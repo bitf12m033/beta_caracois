@@ -206,7 +206,28 @@ class CustomerProductController extends Controller
             array_push($items,array('id'=>$item->id,'product_name'=>$item->product_name,'product_image'=>$item->product_image,'qty'=>$details['qty'],'sell_price'=>$item->sell_price,'subtotal'=>$item->sell_price*$details['qty']));
         }
 
-        return view('front.cart',compact('items'));
+        return view('front.cart',compact('items','total'));
+    }
+    public function checkout(Request $request)
+    {
+        
+        if(!session('cart'))
+        {
+            toastr()->error('Cart is Empty', 'Error!');
+            return redirect()->back();
+        }
+       
+        $total =0;
+        $items = [];
+        foreach (session('cart') as $key => $details)
+        {
+            // dd($qty);
+            $item = Product::where('id',$key)->first();
+            $total += $item->sell_price * $details['qty'];
+            array_push($items,array('id'=>$item->id,'product_name'=>$item->product_name,'product_image'=>$item->product_image,'qty'=>$details['qty'],'sell_price'=>$item->sell_price,'subtotal'=>$item->sell_price*$details['qty']));
+        }
+
+        return view('front.checkout',compact('items','total'));
     }
 
     public function updateCart(Request $request)
@@ -241,5 +262,12 @@ class CustomerProductController extends Controller
             return redirect()->back();          
         }
   
+    }
+
+    public function placeOrder(Request $request)
+    {
+        echo "<pre>";
+        print_r(session()->get('cart'));
+        dd($request->all());
     }
 }

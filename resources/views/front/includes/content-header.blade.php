@@ -26,7 +26,11 @@
 			                <li><a href="/contact-us" class="nav-link text-left">Contact</a></li>
 		                	<li class="active">
 		                		<a href="/cart-detail" class="nav-link text-left cart-link" id="cart-count">Cart
-		                			<span class="badge badge-pill badge-danger">0</span>
+		                			@if(session()->has('cart'))
+		                				<span class="badge badge-pill badge-danger">{{ count(Session::get('cart')) }}</span>
+		                			@else
+		                				<span class="badge badge-pill badge-danger">0</span>
+		                			@endif
 		                		</a>
 		                	</li>
 			            </ul>

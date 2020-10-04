@@ -103,7 +103,7 @@
                     <span class="text-black">Subtotal</span>
                   </div>
                   <div class="col-md-6 text-right">
-                    <strong class="text-black">$230.00</strong>
+                    <strong class="text-black">${{$total}}</strong>
                   </div>
                 </div>
                 <div class="row mb-5">
@@ -111,13 +111,13 @@
                     <span class="text-black">Total</span>
                   </div>
                   <div class="col-md-6 text-right">
-                    <strong class="text-black">$230.00</strong>
+                    <strong class="text-black">${{$total}}</strong>
                   </div>
                 </div>
     
                 <div class="row">
                   <div class="col-md-12">
-                    <button class="btn btn-primary btn-lg btn-block" onclick="window.location='checkout.html'">Proceed To
+                    <button class="btn btn-primary btn-lg btn-block" onclick="window.location='/checkout'">Proceed To
                       Checkout</button>
                   </div>
                 </div>
