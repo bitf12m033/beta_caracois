@@ -22,8 +22,11 @@
 		                	</li>
 			                <li><a href="/about-us" class="nav-link text-left">About</a></li>
 			                <li><a href="/products-list" class="nav-link text-left">Products</a></li>
-			                <li><a href="/products-list" class="nav-link text-left">Shop</a></li>
-			                <li><a href="/contact-us" class="nav-link text-left">Contact</a></li>
+			            
+			                <!-- <li><a href="/contact-us" class="nav-link text-left">Contact</a></li> -->
+			                @auth
+			                	<li><a href="/order-history" class="nav-link text-left">Order History</a></li>
+			                @endauth
 		                	<li class="active">
 		                		<a href="/cart-detail" class="nav-link text-left cart-link" id="cart-count">Cart
 		                			@if(session()->has('cart'))

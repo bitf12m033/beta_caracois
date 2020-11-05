@@ -18,7 +18,7 @@
           <div class="col-md-6 mb-5 mb-md-0">
             <h2 class="h3 mb-3 text-black font-heading-serif">Billing Details</h2>
             <div class="p-3 p-lg-5 border">
-              <div class="form-group">
+              <!-- <div class="form-group">
                 <label for="c_country" class="text-black">Country <span class="text-danger">*</span></label>
                 <select id="c_country" class="form-control">
                   <option value="1">Select a country</option>
@@ -31,7 +31,7 @@
                   <option value="8">Colombia</option>
                   <option value="9">Dominican Republic</option>
                 </select>
-              </div>
+              </div> -->
               <div class="form-group row">
                 <div class="col-md-12">
                   <label for="c_fname" class="text-black">Full Name <span class="text-danger">*</span></label>
@@ -78,7 +78,7 @@
               <div class="form-group">
                 <label for="c_create_account" class="text-black" data-toggle="collapse" href="#create_an_account"
                   role="button" aria-expanded="false" aria-controls="create_an_account"><input type="checkbox" value="1"
-                    id="c_create_account" checked name="create_account"> Create an account?</label>
+                    id="c_create_account"  name="create_account"> Create an account?</label>
                 <div class="collapse" id="create_an_account">
                   <div class="py-2">
                     <p class="mb-3">Create an account by entering the information below. If you are a returning customer
@@ -93,7 +93,7 @@
               </div>
     
     
-              <div class="form-group">
+              <!-- <div class="form-group">
                 <label for="c_ship_different_address" class="text-black" data-toggle="collapse"
                   href="#ship_different_address" role="button" aria-expanded="false"
                   aria-controls="ship_different_address"><input type="checkbox" value="1" id="c_ship_different_address">
@@ -174,7 +174,7 @@
                 <label for="c_order_notes" class="text-black">Order Notes</label>
                 <textarea name="c_order_notes" id="c_order_notes" cols="30" rows="5" class="form-control"
                   placeholder="Write your notes here..."></textarea>
-              </div>
+              </div> -->
     
             </div>
           </div>
@@ -226,7 +226,7 @@
                     </tbody>
                   </table>
     
-                  <div class="border mb-3 p-3 rounded">
+                 <!--  <div class="border mb-3 p-3 rounded">
                     <h3 class="h6 mb-0"><a class="d-block" data-toggle="collapse" href="#collapsebank" role="button"
                         aria-expanded="false" aria-controls="collapsebank">Direct Bank Transfer</a></h3>
     
@@ -236,11 +236,11 @@
                           payment reference. Your order won’t be shipped until the funds have cleared in our account.</p>
                       </div>
                     </div>
-                  </div>
+                  </div> -->
     
                   <div class="border mb-3 p-3 rounded">
                     <h3 class="h6 mb-0"><a class="d-block" data-toggle="collapse" href="#collapsecheque" role="button"
-                        aria-expanded="false" aria-controls="collapsecheque">Cheque Payment</a></h3>
+                        aria-expanded="false" aria-controls="collapsecheque">Cash on Delivery</a></h3>
     
                     <div class="collapse" id="collapsecheque">
                       <div class="py-2 pl-0">
@@ -250,7 +250,7 @@
                     </div>
                   </div>
     
-                  <div class="border mb-5 p-3">
+                 <!--  <div class="border mb-5 p-3">
                     <h3 class="h6 mb-0"><a class="d-block" data-toggle="collapse" href="#collapsepaypal" role="button"
                         aria-expanded="false" aria-controls="collapsepaypal">Paypal</a></h3>
     
@@ -260,7 +260,7 @@
                           payment reference. Your order won’t be shipped until the funds have cleared in our account.</p>
                       </div>
                     </div>
-                  </div>
+                  </div> -->
     
                   <div class="form-group">
                     <button class="btn btn-primary btn-lg btn-block" onclick="placeOrder();">Place

@@ -52,7 +52,7 @@
       
                       </td>
                       <td>${{$item['subtotal']}}</td>
-                      <td><a href="#" class="btn btn-primary height-auto btn-sm">X</a></td>
+                      <td><a href="/delete-cart-item/{{$item['id']}}" class="btn btn-primary height-auto btn-sm">X</a></td>
                     </tr>
                   @endforeach
     

@@ -37,10 +37,16 @@ Route::get('/bo', function () {
 Route::get('/home-login', function () {
     return view('front.auth.login');
 });
+Route::get('/home-register', function () {
+    return view('front.auth.register');
+});
+Route::get('/thankyou', function () {
+    return view('front.thankyou');
+});
 
 
 Auth::routes();
-Route::get('/home', 'HomeController@index')->name('home')->middleware('user');
+Route::get('/home', 'UserController@index')->name('home')->middleware('user');
 
 Route::get('/admin', 'AdminController@index')->name('admin')->middleware('admin');
 Route::get('/products-list', 'HomeController@showProducts')->name('products-list');
@@ -49,6 +55,8 @@ Route::post('/update-atc', 'CustomerProductController@updateCart')->name('update
 Route::get('/cart-detail', 'CustomerProductController@getCartDetails')->name('cartdetail');
 Route::get('/checkout', 'CustomerProductController@checkout')->name('checkout');
 Route::post('/place-order', 'CustomerProductController@placeOrder')->name('placeorder');
+Route::get('/order-history', 'CustomerProductController@fetchOrderHistoryForUser')->name('orderhistory');
+Route::get('/delete-cart-item/{id}', 'CustomerProductController@deleteItemFromCart')->name('deleteitemromcart');
 
 Route::group(['middleware' => 'App\Http\Middleware\AdminMiddleware'], function()
 {

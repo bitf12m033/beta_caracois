@@ -26,5 +26,5 @@
   <link rel="stylesheet" href="{{asset('/assets/front/css/style.css')}}">
 
 
-
+  @toastr_css
 </head>
