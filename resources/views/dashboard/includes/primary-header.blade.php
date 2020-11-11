@@ -3,7 +3,7 @@
 
 						<!-- begin:: Header Menu -->
 						<button class="kt-header-menu-wrapper-close" id="kt_header_menu_mobile_close_btn"><i class="la la-close"></i></button>
-						<div class="kt-header-menu-wrapper" id="kt_header_menu_wrapper">
+						<div class="kt-header-menu-wrapper " id="kt_header_menu_wrapper" >
 							<div id="kt_header_menu" class="kt-header-menu kt-header-menu-mobile  kt-header-menu--layout-default ">
 								<ul class="kt-menu__nav ">
 									<li class="kt-menu__item  kt-menu__item--open kt-menu__item--here kt-menu__item--submenu kt-menu__item--rel kt-menu__item--open kt-menu__item--here kt-menu__item--active" data-ktmenu-submenu-toggle="click" aria-haspopup="true"><a href="javascript:;" class="kt-menu__link kt-menu__toggle"><span class="kt-menu__link-text">Pages</span></a>
@@ -261,11 +261,11 @@
 										</svg> <span class="kt-pulse__ring"></span>
 									</span>
 
+								</div>
 									<!--
 					                Use dot badge instead of animated pulse effect: 
 					                <span class="kt-badge kt-badge--dot kt-badge--notify kt-badge--sm kt-badge--brand"></span>
 					            -->
-								</div>
 								<div class="dropdown-menu dropdown-menu-fit dropdown-menu-right dropdown-menu-anim dropdown-menu-top-unround dropdown-menu-lg">
 									<form>
 
@@ -757,10 +757,10 @@
 											</g>
 										</svg> </span>
 								</div>
-								<div class="dropdown-menu dropdown-menu-fit dropdown-menu-right dropdown-menu-anim dropdown-menu-top-unround dropdown-menu-xl">
+								<!-- <div class="dropdown-menu dropdown-menu-fit dropdown-menu-right dropdown-menu-anim dropdown-menu-top-unround dropdown-menu-xl">
 									<form>
 
-										<!-- begin:: Mycart -->
+										
 										<div class="kt-mycart">
 											<div class="kt-mycart__head kt-head" style="background-image: url(./assets/media/misc/bg-1.jpg);">
 												<div class="kt-mycart__info">
@@ -880,15 +880,15 @@
 											</div>
 										</div>
 
-										<!-- end:: Mycart -->
+									
 									</form>
-								</div>
+								</div> -->
 							</div>
 
 							<!--end: My Cart -->
 
 							<!--begin: Quick panel toggler -->
-							<div class="kt-header__topbar-item kt-header__topbar-item--quick-panel" data-toggle="kt-tooltip" title="Quick panel" data-placement="right">
+							<!-- <div class="kt-header__topbar-item kt-header__topbar-item--quick-panel" data-toggle="kt-tooltip" title="Quick panel" data-placement="right">
 								<span class="kt-header__topbar-icon" id="kt_quick_panel_toggler_btn">
 									<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
 										<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -897,12 +897,12 @@
 											<path d="M5.5,13 L9.5,13 C10.3284271,13 11,13.6715729 11,14.5 L11,18.5 C11,19.3284271 10.3284271,20 9.5,20 L5.5,20 C4.67157288,20 4,19.3284271 4,18.5 L4,14.5 C4,13.6715729 4.67157288,13 5.5,13 Z M14.5,4 L18.5,4 C19.3284271,4 20,4.67157288 20,5.5 L20,9.5 C20,10.3284271 19.3284271,11 18.5,11 L14.5,11 C13.6715729,11 13,10.3284271 13,9.5 L13,5.5 C13,4.67157288 13.6715729,4 14.5,4 Z M14.5,13 L18.5,13 C19.3284271,13 20,13.6715729 20,14.5 L20,18.5 C20,19.3284271 19.3284271,20 18.5,20 L14.5,20 C13.6715729,20 13,19.3284271 13,18.5 L13,14.5 C13,13.6715729 13.6715729,13 14.5,13 Z" id="Combined-Shape" fill="#000000" opacity="0.3" />
 										</g>
 									</svg> </span>
-							</div>
+							</div> -->
 
 							<!--end: Quick panel toggler -->
 
 							<!--begin: Language bar -->
-							<div class="kt-header__topbar-item kt-header__topbar-item--langs">
+							<!-- <div class="kt-header__topbar-item kt-header__topbar-item--langs">
 								<div class="kt-header__topbar-wrapper" data-toggle="dropdown" data-offset="10px,0px">
 									<span class="kt-header__topbar-icon">
 										<img class="" src="{{ asset('/assets/media/flags/020-flag.svg') }}" alt="" />
@@ -930,7 +930,7 @@
 										</li>
 									</ul>
 								</div>
-							</div>
+							</div> -->
 
 							<!--end: Language bar -->
 
