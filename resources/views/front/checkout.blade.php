@@ -5,6 +5,7 @@
 
     <div class="site-section">
       <div class="container">
+        @if(!Auth::check())
         <div class="row mb-5">
           <div class="col-md-12">
             <div class="bg-light rounded p-3">
@@ -12,6 +13,7 @@
             </div>
           </div>
         </div>
+        @endif
         <form class="form" id="checkout-form" method="POST" action="/place-order">
           @csrf
         <div class="row">
@@ -35,18 +37,18 @@
               <div class="form-group row">
                 <div class="col-md-12">
                   <label for="c_fname" class="text-black">Full Name <span class="text-danger">*</span></label>
-                  <input type="text" class="form-control" id="c_fname" name="name">
+                  <input type="text" class="form-control" id="c_fname" name="name" value="{{ Auth::user()->name??  ''}}">
                 </div>
                
               </div>
               <div class="form-group row ">
                 <div class="col-md-6">
                   <label for="c_email_address" class="text-black">Email Address <span class="text-danger">*</span></label>
-                  <input type="email" class="form-control" id="c_email_address" name="email">
+                  <input type="email" class="form-control" id="c_email_address" name="email" value="{{ Auth::user()->email??  ''}}">
                 </div>
                 <div class="col-md-6">
                   <label for="c_phone" class="text-black">Phone <span class="text-danger">*</span></label>
-                  <input type="text" class="form-control" id="c_phone" name="phone" placeholder="Phone Number">
+                  <input type="text" class="form-control" id="c_phone" name="phone" value="{{ Auth::user()->phone??  ''}}" placeholder="Phone Number">
                 </div>
               </div>
              
@@ -54,27 +56,27 @@
               <div class="form-group row">
                 <div class="col-md-12">
                   <label for="c_address" class="text-black">Address <span class="text-danger">*</span></label>
-                  <input type="text" class="form-control" id="c_address" name="address1" placeholder="Street address">
+                  <input type="text" class="form-control" id="c_address" name="address1" value="{{ Auth::user()->address1??  ''}}"  placeholder="Street address">
                 </div>
               </div>
     
               <div class="form-group">
-                <input type="text" class="form-control" name="address2" placeholder="Apartment, suite, unit etc. (optional)">
+                <input type="text" class="form-control" name="address2" value="{{ Auth::user()->address2??  ''}}" placeholder="Apartment, suite, unit etc. (optional)">
               </div>
     
               <div class="form-group row">
                 <div class="col-md-6">
                   <label for="c_state_country" class="text-black">State <span class="text-danger">*</span></label>
-                  <input type="text" class="form-control" id="c_state_country" name="state">
+                  <input type="text" class="form-control" id="c_state_country" name="state" value="{{ Auth::user()->state??  ''}}">
                 </div>
                 <div class="col-md-6">
                   <label for="c_postal_zip" class="text-black">Postal / Zip <span class="text-danger">*</span></label>
-                  <input type="text" class="form-control" id="c_postal_zip" name="zip">
+                  <input type="text" class="form-control" id="c_postal_zip" name="zip" value="{{ Auth::user()->zip??  ''}}">
                 </div>
               </div>
     
               
-    
+              @if(!Auth::check())
               <div class="form-group">
                 <label for="c_create_account" class="text-black" data-toggle="collapse" href="#create_an_account"
                   role="button" aria-expanded="false" aria-controls="create_an_account"><input type="checkbox" value="1"
@@ -91,7 +93,7 @@
                   </div>
                 </div>
               </div>
-    
+              @endif
     
               <!-- <div class="form-group">
                 <label for="c_ship_different_address" class="text-black" data-toggle="collapse"
