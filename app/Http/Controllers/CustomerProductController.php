@@ -372,6 +372,7 @@ class CustomerProductController extends Controller
 
     public function fetchOrderHistoryForUser()
     {
+        // dd(Auth::user());
         $email = Auth::user()->email;
         session()->forget('cart');
 

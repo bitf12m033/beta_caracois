@@ -15,6 +15,7 @@ class User
      */
     public function handle($request, Closure $next)
     {
+        // dd(Auth::user());
          // return $next($request);
         if(!Auth::check())
         {
