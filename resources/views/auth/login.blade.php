@@ -49,9 +49,9 @@ License: You must have a valid license purchased only from themeforest(the above
 												<span></span>
 											</label>
 										</div>
-										<div class="col kt-align-right">
+										<!-- <div class="col kt-align-right">
 											<a href="javascript:;" id="kt_login_forgot" class="kt-login__link">Forget Password ?</a>
-										</div>
+										</div> -->
 									</div>
 									<div class="kt-login__actions">
 										<button id="kt_login_signin_submit" class="btn btn-brand btn-pill kt-login__btn-primary">Sign In</button>
@@ -108,13 +108,13 @@ License: You must have a valid license purchased only from themeforest(the above
 									</div>
 								</form>
 							</div>
-							<div class="kt-login__account">
+							<!-- <div class="kt-login__account">
 								<span class="kt-login__account-msg">
 									Don't have an account yet ?
 								</span>
 								&nbsp;&nbsp;
 								<a href="javascript:;" id="kt_login_signup" class="kt-login__account-link">Sign Up!</a>
-							</div>
+							</div> -->
 						</div>
 					</div>
 				</div>

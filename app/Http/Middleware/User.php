@@ -15,9 +15,10 @@ class User
      */
     public function handle($request, Closure $next)
     {
+         // return $next($request);
         if(!Auth::check())
         {
-            return redirect()->route('home-login');
+            return redirect('home-login');
         }
 
         if(Auth::user()->role_type == 'customer')
@@ -32,7 +33,7 @@ class User
 
         if(Auth::user()->role_type == 'delivery')
         {
-            return redirect()->route('admin');
+            return redirect()->route('delivery');
         }
         
     }

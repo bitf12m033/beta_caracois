@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use App\Mail\AccountCreated;
 use Illuminate\Support\Facades\Mail;
-
+use Auth;
 class UserController extends Controller
 {
     /**
@@ -29,7 +29,10 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('dashboard.user.index');
+        if(Auth::user()->role_type == 'customer')
+            return view('front.index');
+        else
+            return view('dashboard.user.index');
     }
 
     /**
@@ -39,7 +42,9 @@ class UserController extends Controller
      */
     public function create()
     {
-         return view('dashboard.user.add');
+        
+        return view('dashboard.user.add');
+       
     }
 
     /**
@@ -140,16 +145,16 @@ class UserController extends Controller
     {
          $request->validate([
             'name' => 'required',
-            'email' => 'required|unique:users',
+            // 'email' => 'required|unique:users',
             'phone' => 'required',
-            'password' => 'required',
+            // 'password' => 'required',
             'zip' => 'required',
             'state' => 'required',
             'dob' => 'required',
-            'role_type' => 'required',
+            // 'role_type' => 'required',
             'user_image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
-
+        $user = User::find($id);
         if ($request->file('user_image')) {
               $imagePath = $request->file('user_image');
               $imageName = uniqid().".".$request->file('user_image')->extension();
@@ -159,9 +164,9 @@ class UserController extends Controller
             $user->user_image = $path;
         }
        
-        $user = User::find($id);
+        
         $user->name = $request->input('name');
-        $user->email = $request->input('email');
+        // $user->email = $request->input('email');
         $user->phone = $request->input('phone');
         $user->city = $request->input('city');
         $user->state = $request->input('state');
@@ -170,7 +175,7 @@ class UserController extends Controller
         $user->address2 = $request->input('address2');
         $user->dob = Carbon::parse($request->input('dob'))->format('Y-m-d');
         $user->role_type = $request->input('role_type');
-        $user->password = Hash::make($request->input('password'));
+        // $user->password = Hash::make($request->input('password'));
         
         
         if($user->save())

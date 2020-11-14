@@ -55,7 +55,7 @@
 									<div class="input-group-prepend">
 										<span class="input-group-text">@</span>
 									</div>
-									<input type="email" value="{{$user->email}}" id="email" name="email" class="form-control" placeholder="Email" aria-describedby="basic-addon1">
+									<input type="email" value="{{$user->email}}" id="email" name="email" class="form-control" placeholder="Email" readonly aria-describedby="basic-addon1">
 								</div>
 								<!-- <span class="form-text text-muted">Please enter your email</span> -->
 							</div>
@@ -114,15 +114,15 @@
 								</div>
 								<!-- <span class="form-text text-muted">Please enter your postcode</span> -->
 							</div>
-							<div class="col-lg-4">
+							<!-- <div class="col-lg-4">
 								<label for="password">New Password</label>
 								<div class="kt-input-icon kt-input-icon--right">
 									<input type="text" id="password" name="password" class="form-control" placeholder="Reset password">
 									<span class="kt-input-icon__icon kt-input-icon__icon--right"><span><i class="la la-bookmark-o"></i></span></span>
 								</div>
-								<!-- <span class="form-text text-muted">Please enter your postcode</span> -->
-							</div>
-							@if(\Illuminate\Support\Facades\Auth::user()->role_type == 'admin')
+								
+							</div> -->
+							@if(Auth::user()->role_type == 'admin')
 							<div class="col-lg-4">
 								<label class="">User Group:</label>
 								<div class="kt-radio-inline">

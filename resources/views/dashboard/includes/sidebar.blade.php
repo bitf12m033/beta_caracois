@@ -59,7 +59,7 @@
 						<span class="kt-menu__link-text">Dashboard</span>
 					</a>
 				</li>
-				@if(\Illuminate\Support\Facades\Auth::check() && \Illuminate\Support\Facades\Auth::user()->role_type == 'admin')
+				@if(Auth::check() && Auth::user()->role_type == 'admin')
 				<li class="kt-menu__item {{ Request::is('products*') ? 'kt-menu__item--active' : '' }}" aria-haspopup="true">
 					<a  href="{{ url('products') }}" class="kt-menu__link ">
 						<span class="kt-menu__link-icon">
@@ -75,7 +75,7 @@
 					</a>
 				</li>
 					@else
-					@if(\Illuminate\Support\Facades\Auth::check() && \Illuminate\Support\Facades\Auth::user()->role_type == 'customer')
+					@if(Auth::check() && Auth::user()->role_type == 'customer')
 					<li class="kt-menu__item {{ Request::is('customer-products*') ? 'kt-menu__item--active' : '' }}" aria-haspopup="true">
 						<a  href="{{ url('customer-products') }}" class="kt-menu__link ">
 						<span class="kt-menu__link-icon">

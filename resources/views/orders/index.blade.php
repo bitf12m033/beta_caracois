@@ -24,13 +24,13 @@
 					<i class="kt-font-brand flaticon2-line-chart"></i>
 				</span>
                     <h3 class="kt-portlet__head-title">
-                        Orders Listing
+                        Orders Listing 
                     </h3>
                 </div>
                 <div class="kt-portlet__head-toolbar">
                     <div class="kt-portlet__head-wrapper">
                         <div class="kt-portlet__head-actions">
-                         {{--   <div class="dropdown dropdown-inline">
+                            <div class="dropdown dropdown-inline kt-hidden" >
                                 <button type="button" class="btn btn-default btn-icon-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="la la-download"></i> Export
                                 </button>
@@ -71,7 +71,7 @@
                                         </li>
                                     </ul>
                                 </div>
-                            </div>--}}
+                            </div> 
                             &nbsp;@if(\Illuminate\Support\Facades\Auth::check() && \Illuminate\Support\Facades\Auth::user()->role_type == 'admin')
                             <a href="{{ route('order.cart')}}" class="btn btn-brand btn-elevate btn-icon-sm">
                                 <i class="la la-plus"></i>

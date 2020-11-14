@@ -48,18 +48,19 @@ Route::get('/thankyou', function () {
 Auth::routes();
 Route::get('/home', 'UserController@index')->name('home')->middleware('user');
 
-Route::get('/admin', 'AdminController@index')->name('admin')->middleware('admin');
+// Route::get('/admin', 'AdminController@index')->name('admin')->middleware(['admin','delivery']);
 Route::get('/products-list', 'HomeController@showProducts')->name('products-list');
 Route::post('/atc', 'CustomerProductController@addToCartAjax')->name('addtocart');
 Route::post('/update-atc', 'CustomerProductController@updateCart')->name('updatecart');
 Route::get('/cart-detail', 'CustomerProductController@getCartDetails')->name('cartdetail');
 Route::get('/checkout', 'CustomerProductController@checkout')->name('checkout');
 Route::post('/place-order', 'CustomerProductController@placeOrder')->name('placeorder');
-Route::get('/order-history', 'CustomerProductController@fetchOrderHistoryForUser')->name('orderhistory');
+
 Route::get('/delete-cart-item/{id}', 'CustomerProductController@deleteItemFromCart')->name('deleteitemromcart');
 
 Route::group(['middleware' => 'App\Http\Middleware\AdminMiddleware'], function()
 {
+    Route::get('/admin', 'AdminController@index')->name('admin');
     Route::get('/ajax/products', 'ProductController@fetchAllProducts')->name('ajax-products');
     Route::get('/ajax/users', 'UserController@fetchAllUsers')->name('ajax-users');
     Route::get('delivery-persons', 'UserController@delivery_boys')->name('delivery-persons');
@@ -75,9 +76,13 @@ Route::group(['middleware' => 'App\Http\Middleware\AdminMiddleware'], function()
 
 Route::group(['middleware' => 'App\Http\Middleware\DeliveryBoyMiddleware'], function()
 {
+    Route::get('/delivery', 'AdminController@index')->name('delivery');
     Route::get('delivery-orders', 'OrderController@index')->name('delivery-orders');
+    Route::get('users/{id}/edit', 'UserController@edit');
+
 });
 
+Route::get('/order-history', 'CustomerProductController@fetchOrderHistoryForUser')->middleware('user');
 Route::group(['middleware'=> 'auth'], function()
 {
     Route::resources([
@@ -97,8 +102,9 @@ Route::group(['middleware'=> 'auth'], function()
 
     Route::get('customer-cart', 'CustomerProductController@cart')->name('customer.order.cart');
     Route::get('user-profile/{id}', 'ShowProfile');
-
 });
+
+
 Route::get('/send/email', function () {
     $mail_data['name'] = 'test';
     $mail_data['subject'] = 'Account Created';
@@ -106,7 +112,7 @@ Route::get('/send/email', function () {
     $mail_data['contact_no'] = '03126000109';
     $mail_data['total'] = '220';
     $name = 'b013.049@gmail.com';
-    \Illuminate\Support\Facades\Mail::to($name)->send(new \App\Mail\OrderPlaced($mail_data));
+    // \Illuminate\Support\Facades\Mail::to($name)->send(new \App\Mail\OrderPlaced($mail_data));
 
     return 'Email sent Successfully';
 });

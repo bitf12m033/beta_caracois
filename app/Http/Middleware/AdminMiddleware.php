@@ -32,12 +32,13 @@ class AdminMiddleware
 
         if(Auth::user()->role_type == 'delivery')
         {
-            return redirect()->route('admin');
+            return redirect()->route('delivery');
         }
-        
-        /*if ($request->user() && $request->user()->role_type != 'admin')
+        // dd(Auth::user());
+       /* if (Auth::user() && Auth::user()->role_type != 'admin')
         {
             return response()->view('pages.unauthorized',['role' => 'ADMIN']);
-        }*/
+        }
+        return $next($request);*/
     }
 }
